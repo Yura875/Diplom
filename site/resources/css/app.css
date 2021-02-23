@@ -1,0 +1,249 @@
+
+.header {
+    background: #002f34;
+    width: 100%;
+    min-width: 610px;
+    min-height: 72px;
+    text-align: center;
+
+}
+
+.home-link {
+    display: flex;
+    align-items: center;
+}
+
+.home-link img {
+    width: 85px;
+    height: 65px;
+}
+
+.navigation {
+    display: flex;
+    width: 80%;
+    align-items: normal;
+    margin: auto;
+}
+
+.navigation div {
+    float: right;
+}
+
+.favorites {
+    width: 60px;
+    margin-right: 0;
+
+    padding: 0;
+    float: right;
+    text-align: center;
+    cursor: pointer;
+}
+
+.favorites img {
+    width: 60px;
+    height: 50px;
+
+}
+
+#new-ad-link {
+    background: #fff;
+    color: #002f34;
+    display: flex;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 1.25;
+    cursor: pointer;
+
+    text-align: center;
+
+    padding: 15px;
+    align-items: center;
+
+
+    box-shadow: inset 0 0 0 8px #fff;
+
+    border-radius: 4px;
+
+    transition: all 0.3s ease;
+}
+
+#new-ad-link:hover {
+    background: transparent;
+    color: #fff;
+    transition: all 0.3s ease;
+}
+
+.profile {
+    color: #fff;
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: bold;
+    width: 200px;
+    text-align: center;
+    text-decoration: none;
+    padding: 0;
+    margin-right: 1%;
+
+
+}
+
+.profile:hover {
+    color: #fff;
+    cursor: pointer;
+    text-decoration: none;
+
+}
+
+.profile img {
+    width: 40px;
+    height: 40px;
+    margin: 0;
+
+
+}
+
+.profile span {
+    background: none;
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    margin: 0;
+    transition: all 0.3s ease;
+
+}
+
+.right-panel {
+    display: contents;
+    float: right;
+    text-align: center;
+}
+
+.right-panel div {
+    display: inline-flex;
+}
+
+
+.auth-page {
+    padding: 40px 0 48px;
+    display: flex;
+    background: #3a77ff;
+    border-bottom: 1px solid #7f9799;
+    min-height: 792px;
+    box-sizing: border-box;
+    box-shadow: 0 -72px 0 0 #3a77ff;
+
+
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.auth-box{
+    width: 400px;
+
+    box-sizing: border-box;
+    display: inline-block;
+    vertical-align: top;
+    position: relative;
+    background: #fff;
+    font-size: 12px;
+    color: #71848d;
+    border-radius: 8px;
+}
+.nav-tab li{
+    border-bottom: 1px solid #002f34;
+    width: 50%;
+
+cursor: pointer;
+    display: inline-block;
+    font-size: 14px;
+    line-height: 1.29;
+}
+.nav-tab li a{
+    display: block;
+    padding: 20px;
+    color: #002f34;
+    text-align: center;
+    text-decoration: none;
+    position: relative;
+
+}
+.nav-tab li a.active::before{
+    width: 100%;
+    height: 2px;
+    background: #002f34;
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+.auth-block{
+    width: 90%;
+    margin: 20px;
+    font-size: 14px;
+}
+.auth-block label{
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 14px;
+}
+.auth-block input[type=email],
+.auth-block input[type=text],
+.auth-block input[type=password]
+{
+    outline: none;
+    border: none;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 14px 16px;
+    border-radius: 4px;
+    font-size: 14px;
+    background: #f2f4f5;
+}
+.auth-block input[type=email]:focus,
+.auth-block input[type=text]:focus,
+.auth-block input[type=password]:focus{
+
+    border-bottom: 2px solid #002f34;
+}
+
+.auth-block a{
+    color: #002f34;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 1.24;
+}
+.auth-block a:hover{
+    color: #002f34;
+    text-decoration: underline;
+}
+
+.Login-Button{
+    width: 100%;
+    margin-bottom: 10px;
+    display: flex;
+    position: relative;
+    text-align: center;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 500;
+    background: #002f34;
+    cursor: pointer;
+    box-shadow: 0 0 0 2px #002f34;
+    border: none;
+    padding: 10px 16px;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    border-radius: 4px;
+}
+#serverAns{
+    text-align: center;
+}
+.err-div{
+    color: red;
+    margin: 0;
+    font-size: 14px;
+}
