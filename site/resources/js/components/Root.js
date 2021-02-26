@@ -6,6 +6,7 @@ import Error404 from "./errors/er404";
 import accountIndex from "./account/accountIndex";
 import Welcome from "./home/welcome";
 import Profile from "./profile/profile";
+import VerificateEmail from "./account/verificateEmail";
 
 function Root() {
     return (
@@ -13,15 +14,11 @@ function Root() {
             <Header/>
             <Switch>
                 <Route exact path="/" component={Welcome}/>
+
                 <Route path="/account" component={accountIndex}/>
+                <Route path="account/verification" component={VerificateEmail}/>
+
                 <Route path="/myaccount" component={Profile}/>
-                <Route path="/myaccount/answers" component={Profile}/>
-                <Route path="/myaccount/settings" component={Profile}/>
-
-
-
-
-
 
                 <Route component={Error404}/>
             </Switch>

@@ -18,8 +18,12 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-
+// Users
 Route::resource("/user",\App\Http\Controllers\API\UserController::class);
 Route::get("/user/{id}",[\App\Http\Controllers\API\UserController::class,'show']);
 Route::post("/user/login",[\App\Http\Controllers\API\UserController::class,'login']);
+
+// Email verification
+Route::get('email/verify/{id}', 'App\Http\Controllers\API\VerificationController@verify')->name('verification.verify');
+Route::get('email/resend', 'App\Http\Controllers\API\VerificationController@resend')->name('verification.resend');
 

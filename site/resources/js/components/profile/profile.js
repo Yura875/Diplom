@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import CookieOperations from "../util/cookieOperations";
+import Posts from "./posts";
 
 
 export default class Profile extends Component {
@@ -22,7 +23,6 @@ export default class Profile extends Component {
     }
 
     read() {
-
         let user_token = CookieOperations.get_cookie("user");
 
         if (!user_token) {

@@ -8,30 +8,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-use PDOException;
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        return User::all();
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
     public function login(Request $request)
     {
         $data = $request->validate([
@@ -40,6 +20,10 @@ class UserController extends Controller
         ]);
         if (!Auth::attempt($data)) {
             return response(["status" => -1]);
+        }
+        if (empty(Auth::user()->email_verified_at)) {
+            Auth::user()->sendEmailVerificationNotification();
+            return response(["status"=>2]);
         }
         $token = Auth::user()->createToken($data['email'])->token->id;
         return response(["status" => 1, "token" => $token]);
@@ -53,14 +37,23 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->validate([
+        $validator = Validator::make($request->all(), [
             'email' => 'required|email|unique:users,email',
             'password' => 'required|string|min:8',
+            'password_confirmation' => 'required|same:password'
         ]);
+        if ($validator->fails()) {
+            return response(["status" => -1, "msg" => $validator->errors()]);
+
+        }
+
+        $data = $request->all();
+
         $data['password'] = Hash::make($data['password']);
         $data['name'] = substr($data['email'], 0, strrpos($data['email'], '@'));
-        User::create($data);
-        return response('{"status":1,"msg":"Регистрация прошла успешно"}', 201);
+        $user = User::create($data);
+        $user->sendEmailVerificationNotification();
+        return response('{"status":1,"msg":"Регистрация прошла успешно"}');
     }
 
     /**
@@ -81,15 +74,9 @@ class UserController extends Controller
         return response(["status" => 1, "user" => $user]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    public function verificateEmail(Request $request)
     {
-        //
+        return "fdulh";
     }
 
     /**
