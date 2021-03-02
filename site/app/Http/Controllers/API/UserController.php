@@ -74,10 +74,7 @@ class UserController extends Controller
         return response(["status" => 1, "user" => $user]);
     }
 
-    public function verificateEmail(Request $request)
-    {
-        return "fdulh";
-    }
+
 
     /**
      * Update the specified resource in storage.

@@ -10144,7 +10144,7 @@ h3 {
     justify-content: center;
 }
 
-.auth-box{
+.auth-box {
     width: 400px;
 
     box-sizing: border-box;
@@ -10156,16 +10156,18 @@ h3 {
     color: #71848d;
     border-radius: 8px;
 }
-.nav-tab li{
+
+.nav-tab li {
     border-bottom: 1px solid #002f34;
     width: 50%;
 
-cursor: pointer;
+    cursor: pointer;
     display: inline-block;
     font-size: 14px;
     line-height: 1.29;
 }
-.nav-tab li a{
+
+.nav-tab li a {
     display: block;
     padding: 20px;
     color: #002f34;
@@ -10174,7 +10176,12 @@ cursor: pointer;
     position: relative;
 
 }
-.nav-tab li a.active::before{
+
+.nav-tab li a:before {
+    transition: width 0.5s ease-in-out;
+}
+
+.nav-tab li a.active::before {
     width: 100%;
     height: 2px;
     background: #002f34;
@@ -10182,22 +10189,26 @@ cursor: pointer;
     position: absolute;
     bottom: 0;
     left: 0;
+    transition: width 0.5s ease-in-out;
+
 }
-.auth-block{
+
+.auth-block {
     width: 90%;
     margin: 20px;
     font-size: 14px;
 }
-.auth-block label{
+
+.auth-block label {
     margin: 0;
     padding: 0;
     border: 0;
     font-size: 14px;
 }
+
 .auth-block input[type=email],
 .auth-block input[type=text],
-.auth-block input[type=password]
-{
+.auth-block input[type=password] {
     outline: none;
     border: none;
     width: 100%;
@@ -10207,26 +10218,28 @@ cursor: pointer;
     font-size: 14px;
     background: #f2f4f5;
 }
+
 .auth-block input[type=email]:focus,
 .auth-block input[type=text]:focus,
-.auth-block input[type=password]:focus{
+.auth-block input[type=password]:focus {
 
     border-bottom: 2px solid #002f34;
 }
 
-.auth-block a{
+.auth-block a {
     color: #002f34;
     text-decoration: none;
     font-size: 14px;
     font-weight: bold;
     line-height: 1.24;
 }
-.auth-block a:hover{
+
+.auth-block a:hover {
     color: #002f34;
     text-decoration: underline;
 }
 
-.Login-Button{
+.Login-Button {
     width: 100%;
     margin-bottom: 10px;
     display: flex;
@@ -10245,12 +10258,89 @@ cursor: pointer;
     box-sizing: border-box;
     border-radius: 4px;
 }
-#serverAns{
+
+#serverAns {
     text-align: center;
 }
-.err-div{
+
+.err-div {
     color: red;
     margin: 0;
     font-size: 14px;
 }
+
+.forgot-password-back {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    text-decoration: none;
+}
+
+.forgot-password-back-arrow {
+    position: relative;
+    margin-right: 20px;
+    color: #002f34;
+}
+
+.forgot-password-back-arrow::before,
+.forgot-password-back-arrow::after
+{  right: -15px;
+    position: absolute;
+    background: #002f34;
+    content: '';
+    width: 20px;
+    height: 2px;
+
+}
+.forgot-password-back-arrow::before {
+    bottom: 6px;
+
+    transform: rotate(-45deg);
+}
+.forgot-password-back-arrow::after {
+    top: 6px;
+    transform: rotate(45deg);
+}
+
+
+.forgot-password-back:hover {
+    text-decoration: none;
+}
+
+.forgot-password-back-text {
+    color: #7f9799;
+    font-weight: 500;
+    text-transform: uppercase;
+    font-size: 14px;
+    letter-spacing: 0.8px;
+}
+.auth-block h2{
+    color: #000;
+    text-align: center;
+    font-size: 45px;
+    width: 100%;
+}
+.auth-block p{
+    padding: 20px 32px 0;
+    font-size: 14px;
+    line-height: 1.29;
+    color: #406367;
+    text-align: center;
+}
+.reset-password h2{
+    font-weight: bold;
+}
+.reset-password p{
+    padding-top: 5px;
+    font-size: 16px;
+}
+.resend-code{
+    cursor: pointer;
+    float: right;
+}
+.resend-code:hover{
+    text-decoration: none;
+}
+
+
 

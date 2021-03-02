@@ -7,6 +7,7 @@ import accountIndex from "./account/accountIndex";
 import Welcome from "./home/welcome";
 import Profile from "./profile/profile";
 import VerificateEmail from "./account/verificateEmail";
+import ForgotPassword from "./account/forgotPassword";
 
 function Root() {
     return (
@@ -16,7 +17,7 @@ function Root() {
                 <Route exact path="/" component={Welcome}/>
 
                 <Route path="/account" component={accountIndex}/>
-                <Route path="account/verification" component={VerificateEmail}/>
+                <Route path="account/:page" component={accountIndex} />
 
                 <Route path="/myaccount" component={Profile}/>
 

@@ -24,6 +24,13 @@ Route::get("/user/{id}",[\App\Http\Controllers\API\UserController::class,'show']
 Route::post("/user/login",[\App\Http\Controllers\API\UserController::class,'login']);
 
 // Email verification
-Route::get('email/verify/{id}', 'App\Http\Controllers\API\VerificationController@verify')->name('verification.verify');
-Route::get('email/resend', 'App\Http\Controllers\API\VerificationController@resend')->name('verification.resend');
+Route::get('/email/verify/{id}', 'App\Http\Controllers\API\VerificationController@verify')->name('verification.verify');
+Route::get('/email/resend', 'App\Http\Controllers\API\VerificationController@resend')->name('verification.resend');
+
+// Password reset
+Route::post('/password/email', 'App\Http\Controllers\API\ForgotPasswordController@forgot');
+Route::post('/password/reset', 'App\Http\Controllers\API\ForgotPasswordController@reset');
+
+
+
 

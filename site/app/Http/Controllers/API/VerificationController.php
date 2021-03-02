@@ -30,7 +30,7 @@ class VerificationController extends Controller
             $user->markEmailAsVerified();
         }
 
-        return redirect()->to('/');
+        return redirect()->to('/account');
     }
 
     /**
