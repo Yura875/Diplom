@@ -1,4 +1,4 @@
-export default class CookieOperations {
+export default class Util {
     static get_cookie(name) {
         let matches = document.cookie.match(new RegExp(
             "(?:^|; )" + name.replace(/([.$?*|{}()[]\/+^])/g, '\$1') + "=([^;]*)"
@@ -27,8 +27,25 @@ export default class CookieOperations {
     }
 
     static deleteCookie(name) {
-      this.set_cookie(name, "", {
+        this.set_cookie(name, "", {
             'max-age': -1
         })
+    }
+
+    static incorrect_user() {
+        let today = new Date();
+        today.setHours(today.getHours() + 1);
+        let path=window.location.pathname.substr(1);
+        Util.set_cookie("path",path, {expires: today})
+        window.location = "/account";
+    }
+
+    static setDivError(id, msg) {
+        const errDiv = document.getElementById(id);
+        if (!errDiv) {
+            return;
+        }
+        errDiv.className = "auth-block err-div";
+        errDiv.innerHTML = msg;
     }
 }

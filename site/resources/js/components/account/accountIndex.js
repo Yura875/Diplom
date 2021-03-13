@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import CookieOperations from "../util/cookieOperations";
+import Util from "../util/util";
 import Authorization from "./authorization";
 import ReactDOM from 'react-dom';
 import Registration from "./registration";

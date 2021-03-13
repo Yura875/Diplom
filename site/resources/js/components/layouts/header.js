@@ -3,7 +3,7 @@ import React,{Component} from 'react';
 export default class Header extends Component{
     render() {
         return (
-            <nav className="navbar navbar-expand-lg header">
+            <nav className="navbar navbar-expand-lg header" id="header">
 
                 <div className="navigation">
                     <a href="/" className="home-link">
@@ -19,7 +19,7 @@ export default class Header extends Component{
                             <span><img src="/Images/profile.png"/>Мой профиль</span>
                         </a>
 
-                        <a id="new-ad-link">Подать объявление</a>
+                        <a id="new-ad-link" href="/addPost">Подать объявление</a>
                     </div>
 
                 </div>

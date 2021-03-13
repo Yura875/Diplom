@@ -54,11 +54,11 @@ export default class ResetPassword extends Component {
             password: this.state.newpassword
         }
         if (!this.state.obj.code) {
-            this.setDivError("codeErr", "Это поле нужно заполнить");
+             Util.setDivError("codeErr", "Это поле нужно заполнить");
             return;
         }
         if (this.state.obj.password.length < 8) {
-            this.setDivError("passErr", "Короткий пароль");
+             Util.setDivError("passErr", "Короткий пароль");
             return;
         }
         fetch("/api/password/reset", {

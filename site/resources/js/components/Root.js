@@ -8,6 +8,9 @@ import Welcome from "./home/welcome";
 import Profile from "./profile/profile";
 import VerificateEmail from "./account/verificateEmail";
 import ForgotPassword from "./account/forgotPassword";
+import Footer from "./layouts/Footer";
+import AddPost from "./profile/addPost";
+import FileOperation from "./tmp/fileOperation";
 
 function Root() {
     return (
@@ -17,12 +20,17 @@ function Root() {
                 <Route exact path="/" component={Welcome}/>
 
                 <Route path="/account" component={accountIndex}/>
-                <Route path="account/:page" component={accountIndex} />
+                <Route path="account/:page" component={accountIndex}/>
 
                 <Route path="/myaccount" component={Profile}/>
 
+                <Route path="/addPost" component={AddPost}/>
+
+
+                <Route path="/tmp/fileOperation" component={FileOperation}/>
                 <Route component={Error404}/>
             </Switch>
+            <Footer/>
         </Router>
     );
 }

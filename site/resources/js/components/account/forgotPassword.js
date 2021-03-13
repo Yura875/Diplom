@@ -51,13 +51,13 @@ export default class ForgotPassword extends Component {
             email: this.state.email,
         }
         if (!this.state.obj.email || 0 === this.state.obj.email.length) {
-            this.setDivError("emailErr", "Это поле нужно заполнить")
+             Util.setDivError("emailErr", "Это поле нужно заполнить")
             return;
         }
         let re = /^[\w-.]+@[\w-]+.[a-z]{2,4}$/i;
         let valid = re.test(this.state.obj.email);
         if (!valid) {
-            this.setDivError("emailErr", "Неправильный формат email");
+             Util.setDivError("emailErr", "Неправильный формат email");
             return;
         }
         console.log(this.state.obj.email);

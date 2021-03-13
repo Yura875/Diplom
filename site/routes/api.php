@@ -31,6 +31,8 @@ Route::get('/email/resend', 'App\Http\Controllers\API\VerificationController@res
 Route::post('/password/email', 'App\Http\Controllers\API\ForgotPasswordController@forgot');
 Route::post('/password/reset', 'App\Http\Controllers\API\ForgotPasswordController@reset');
 
+// File operations
+Route::resource("/file",\App\Http\Controllers\API\FilesOperations::class);
 
 
 

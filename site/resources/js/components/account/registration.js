@@ -7,7 +7,6 @@ export default class Registration extends Component {
         super(props);
         this.reg_user = this.reg_user.bind(this);
         this.onChange = this.onChange.bind(this);
-        this.setDivError = this.setDivError.bind(this);
         this.state = {
             isLoaded: false,
             obj: null,
@@ -29,7 +28,7 @@ export default class Registration extends Component {
 
     onChange(e) {
         this.state[e.target.name] = e.target.value;
-        this.setDivError(e.target.name + "Err", "");
+         Util.setDivError(e.target.name + "Err", "");
     }
 
     setDivError(id, msg) {
@@ -78,22 +77,22 @@ export default class Registration extends Component {
             password_confirmation: this.state.password2,
         }
         if (!this.state.obj.email || 0 === this.state.obj.email.length) {
-            this.setDivError("emailErr", "Это поле нужно заполнить")
+             Util.setDivError("emailErr", "Это поле нужно заполнить")
             return;
         }
         let re = /^[\w-.]+@[\w-]+.[a-z]{2,4}$/i;
         let valid = re.test(this.state.obj.email);
         if (!valid) {
-            this.setDivError("emailErr", "Неправильный формат email");
+             Util.setDivError("emailErr", "Неправильный формат email");
             return;
         }
 
         if (this.state.obj.password.length < 8) {
-            this.setDivError("passwordErr", "Короткий пароль");
+             Util.setDivError("passwordErr", "Короткий пароль");
             return;
         }
         if (this.state.obj.password != this.state.obj.password_confirmation) {
-            this.setDivError("passwordErr", "Пароли не совпадают");
+             Util.setDivError("passwordErr", "Пароли не совпадают");
             return;
         }
         fetch("/api/user", {

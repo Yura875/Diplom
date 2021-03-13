@@ -23,7 +23,7 @@ class UserController extends Controller
         }
         if (empty(Auth::user()->email_verified_at)) {
             Auth::user()->sendEmailVerificationNotification();
-            return response(["status"=>2]);
+            return response(["status" => 2]);
         }
         $token = Auth::user()->createToken($data['email'])->token->id;
         return response(["status" => 1, "token" => $token]);
@@ -75,7 +75,6 @@ class UserController extends Controller
     }
 
 
-
     /**
      * Update the specified resource in storage.
      *
@@ -85,7 +84,34 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $user = User::findOrFail($id);
+        if (empty($user))
+            return response(['status' => -1]);
+        if (!empty($request->location)) {
+            $user->location = $request->location;
+        }
+        if (!empty($request->name)) {
+            $user->name = $request->name;
+        }
+        if (!empty($request->tel)) {
+            $user->tel = $request->tel;
+        }
+        if (!empty($request->oldPassword)) {
+            if (!Hash::check($request->oldPassword, $user->password)) {
+                return response(["status" => -1]);
+            }
+            $validator = Validator::make($request->all(), [
+                'newPassword' => 'required|string|min:8',
+
+            ]);
+            if ($validator->fails()) {
+                return response(["status" => -1, "msg" => $validator->errors()]);
+            }
+            $user->password = Hash::make($request->newPassword);
+        }
+
+        $user->save();
+        return response(["status" => 1, "user" => $user]);
     }
 
     /**
@@ -96,6 +122,6 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+       return response(["status"=> User::destroy($id)]);
     }
 }
