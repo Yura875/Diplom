@@ -184,7 +184,7 @@ class CategoriesTableSeeder extends Seeder
         ]);
         if (!$category->exists) {
             $category->fill([
-                'name' => 'Category 1',
+                'name' => 'CategoryItem 1',
             ])->save();
         }
 
@@ -193,7 +193,7 @@ class CategoriesTableSeeder extends Seeder
         ]);
         if (!$category->exists) {
             $category->fill([
-                'name' => 'Category 2',
+                'name' => 'CategoryItem 2',
             ])->save();
         }
     }

@@ -9,7 +9,7 @@ import Profile from "./profile/profile";
 import VerificateEmail from "./account/verificateEmail";
 import ForgotPassword from "./account/forgotPassword";
 import Footer from "./layouts/Footer";
-import AddPost from "./profile/addPost";
+import AddPost from "./profile/addPost/addPost";
 import FileOperation from "./tmp/fileOperation";
 
 function Root() {

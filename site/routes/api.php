@@ -34,5 +34,9 @@ Route::post('/password/reset', 'App\Http\Controllers\API\ForgotPasswordControlle
 // File operations
 Route::resource("/file",\App\Http\Controllers\API\FilesOperations::class);
 
+// CategoryItem
+Route::resource('/category',\App\Http\Controllers\API\CategoryController::class);
+Route::get('/category/{id}',[\App\Http\Controllers\API\CategoryController::class,'show']);
+
 
 
