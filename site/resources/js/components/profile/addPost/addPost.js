@@ -13,18 +13,37 @@ export default class AddPost extends Component {
             isLoadedUser: false,
             isLoadedCategory: false,
             user: {},
-            category: {}
+            category: {},
+            obj: {}
         }
         this.read_user = this.read_user.bind(this);
         this.read_category = this.read_category.bind(this);
         this.loadNewCategory = this.loadNewCategory.bind(this);
+        this.onChange = this.onChange.bind(this);
+        this.selectCategory = this.selectCategory.bind(this);
+        this.send = this.send.bind(this);
+        this.sendPost = this.send.bind(this);
+        this.updateUser = this.updateUser.bind(this);
 
 
     }
 
+    onChange(e) {
+        this.state[e.target.name] = e.target.value;
+    }
+
+    selectCategory(e) {
+        this.state.categoryId = e.target.id;
+        document.getElementById('category').innerHTML = e.target.innerText;
+        let myModalEl = document.getElementById('CategoryModal');
+        let modal = bootstrap.Modal.getInstance(myModalEl);
+        modal.hide();
+
+    }
+
+
     componentDidMount() {
         this.read_user()
-
     }
 
     render() {
@@ -51,21 +70,21 @@ export default class AddPost extends Component {
                     <div className="field-set-box-title">Заголовок</div>
                     <div>
                         <label className="form-label">Заголовок*</label>
-                        <input type="text" name="title" className="field-set-box-title-input"/>
-                        <small><b id="titleLength">70 </b>знаков осталось</small>
+                        <input type="text" name="title" className="field-set-box-title-input"
+                               onChange={this.onChange} value={this.state.title}/>
                     </div>
                     <div>
                         <label>Рубрика*</label>
-                        <a href="#" className="Category" data-bs-toggle="modal" data-bs-target="#CategoryModal"></a>
+                        <a href="#" id="category" className="Category" data-bs-toggle="modal" name="category"
+                           data-bs-target="#CategoryModal"></a>
                     </div>
                 </div>
                 <div className="field-set-box">
                     <div className="field-set-box-title">Описание</div>
                     <label className="form-label">Описание*</label>
-                    <textarea>
+                    <textarea onChange={this.onChange}>
 
                 </textarea>
-                    <small><b id="descriptionLength">9000 </b>знаков осталось</small>
                 </div>
                 <div className="field-set-box">
                     <div className="field-set-box-title">Фотографии</div>
@@ -82,24 +101,26 @@ export default class AddPost extends Component {
                     </div>
                     <div>
                         <label>Местоположение*</label>
-                        <input type="text" className="add-post-user-data"/>
+                        <input type="text" className="add-post-user-data"
+                               defaultValue={((this.state.location) ? this.state.location : '')}/>
                     </div>
                     <div>
                         <label>Номер телефона</label>
-                        <input type="text" className="add-post-user-data"/>
+                        <input type="tel" className="add-post-user-data"
+                               defaultValue={((this.state.user.tel) ? this.state.user.tel : '')}/>
                     </div>
                     <div>
                         <label>Email-адресс</label>
-                        <input type="text" className="add-post-user-data"/>
+                        <input type="text" className="add-post-user-data" defaultValue={this.state.user.email}/>
                     </div>
                     <div>
                         <label>Контактное лицо*</label>
-                        <input type="text" className="add-post-user-data"/>
+                        <input type="text" className="add-post-user-data" defaultValue={this.state.user.name}/>
                     </div>
                 </div>
                 <div className="field-set-box">
                     <div className="field-set-box-submit">
-                        <input type="button" value="Дальше"/>
+                        <input type="button" value="Дальше" onClick={this.send}/>
                     </div>
                 </div>
 
@@ -111,6 +132,33 @@ export default class AddPost extends Component {
                 </div>
             </div>
         );
+    }
+
+
+    send() {
+        this.state.obj = {
+            title: this.state.title,
+            category_id: this.state.categoryId,
+            author_id: this.state.user.id,
+            body: this.state.description,
+        }
+
+        this.sendPost(this.state.obj);
+
+
+        this.updateUser();
+    }
+
+    sendPost(obj) {
+        fetch("/api/post", {
+            method: "POST",
+            headers: {'Content-Type': "application/json"},
+            body: JSON.stringify(obj)
+        }).then(r => r.text()).then(console.log)
+    }
+
+    updateUser() {
+
     }
 
     read_user() {
@@ -150,10 +198,10 @@ export default class AddPost extends Component {
             <ul className="list-group">
                 {category.map(item => (
 
-                    <li onClick={this.loadNewCategory} id={item.id}
-                    className="list-group-item list-group-item-action list-group-item-light"
-                    key={item.id.toString()}>{item.name}</li>
-                    ))}
+                    <li onClick={this.selectCategory} id={item.id}
+                        className="list-group-item list-group-item-action list-group-item-light"
+                        key={item.id.toString()}>{item.name}</li>
+                ))}
             </ul>
         );
 
@@ -162,9 +210,14 @@ export default class AddPost extends Component {
     loadNewCategory(e) {
         fetch("/api/category/" + e.target.id).then(r => r.json()).then(res => {
             console.log(res);
-            document.getElementById("CategoryModalBody").innerText+= this.renderCategory(res.category);
+            document.getElementById("CategoryModalBody").innerText += this.renderCategory(res.category);
         });
     }
 
+    selectImage() {
+        let input = document.createElement('input');
+        input.type = 'file';
+        input.click();
+    }
 
 }

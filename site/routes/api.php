@@ -38,5 +38,6 @@ Route::resource("/file",\App\Http\Controllers\API\FilesOperations::class);
 Route::resource('/category',\App\Http\Controllers\API\CategoryController::class);
 Route::get('/category/{id}',[\App\Http\Controllers\API\CategoryController::class,'show']);
 
-
+// Posts
+Route::resource('/post',\App\Http\Controllers\API\PostController::class);
 

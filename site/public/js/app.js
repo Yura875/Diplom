@@ -3168,6 +3168,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
 var VerificateEmail = /*#__PURE__*/function (_Component) {
   _inherits(VerificateEmail, _Component);
 
@@ -3182,8 +3183,13 @@ var VerificateEmail = /*#__PURE__*/function (_Component) {
   _createClass(VerificateEmail, [{
     key: "render",
     value: function render() {
-      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
-        children: "verification"
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("a", {
+          children: "\u041E\u0442\u043F\u0440\u0430\u0432\u0438\u0442\u044C \u043F\u043E\u0432\u0442\u043E\u0440\u043D\u043E"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("a", {
+          href: "/",
+          children: "\u0412\u0435\u0440\u043D\u0443\u0442\u0441\u044F \u043D\u0430 \u0433\u043B\u0430\u0432\u043D\u0443\u044E"
+        })]
       });
     }
   }]);
@@ -3304,6 +3310,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
 var Welcome = /*#__PURE__*/function (_Component) {
   _inherits(Welcome, _Component);
 
@@ -3318,7 +3325,21 @@ var Welcome = /*#__PURE__*/function (_Component) {
   _createClass(Welcome, [{
     key: "render",
     value: function render() {
-      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {});
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+        className: "welcome-page",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+            type: "text",
+            name: "search"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+            type: "text",
+            name: "city"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+            type: "button",
+            value: "\u041F\u043E\u0438\u0441\u043A"
+          })]
+        })
+      });
     }
   }]);
 
@@ -3627,10 +3648,10 @@ var AddMainImageWay = /*#__PURE__*/function (_Component) {
 
   var _super = _createSuper(AddMainImageWay);
 
-  function AddMainImageWay() {
+  function AddMainImageWay(props) {
     _classCallCheck(this, AddMainImageWay);
 
-    return _super.apply(this, arguments);
+    return _super.call(this, props);
   }
 
   _createClass(AddMainImageWay, [{
@@ -3641,11 +3662,13 @@ var AddMainImageWay = /*#__PURE__*/function (_Component) {
           className: "add-main-image-way",
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("li", {
             className: "add-image main-image",
+            onClick: this.selectImage,
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("a", {
               children: "\u043D\u0430\u0436\u043C\u0438\u0442\u0435, \u0447\u0442\u043E\u0431\u044B \u0434\u043E\u0431\u0430\u0432\u0438\u0442\u044C \u0433\u043B\u0430\u0432\u043D\u043E\u0435 \u0444\u043E\u0442\u043E"
             })
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("li", {
             className: "add-image",
+            onClick: this.selectImage,
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("a", {
               children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("svg", {
                 "aria-hidden": "true",
@@ -3665,6 +3688,7 @@ var AddMainImageWay = /*#__PURE__*/function (_Component) {
             })
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("li", {
             className: "add-image",
+            onClick: this.selectImage,
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("a", {
               children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("svg", {
                 "aria-hidden": "true",
@@ -3684,6 +3708,7 @@ var AddMainImageWay = /*#__PURE__*/function (_Component) {
             })
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("li", {
             className: "add-image",
+            onClick: this.selectImage,
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("a", {
               children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("svg", {
                 "aria-hidden": "true",
@@ -3706,6 +3731,7 @@ var AddMainImageWay = /*#__PURE__*/function (_Component) {
           className: "add-main-image-way",
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("li", {
             className: "add-image",
+            onClick: this.selectImage,
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("a", {
               children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("svg", {
                 "aria-hidden": "true",
@@ -3725,6 +3751,7 @@ var AddMainImageWay = /*#__PURE__*/function (_Component) {
             })
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("li", {
             className: "add-image",
+            onClick: this.selectImage,
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("a", {
               children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("svg", {
                 "aria-hidden": "true",
@@ -3744,6 +3771,7 @@ var AddMainImageWay = /*#__PURE__*/function (_Component) {
             })
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("li", {
             className: "add-image",
+            onClick: this.selectImage,
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("svg", {
               "aria-hidden": "true",
               focusable: "false",
@@ -3761,6 +3789,7 @@ var AddMainImageWay = /*#__PURE__*/function (_Component) {
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("a", {})]
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("li", {
             className: "add-image",
+            onClick: this.selectImage,
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("a", {
               children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("svg", {
                 "aria-hidden": "true",
@@ -3854,15 +3883,35 @@ var AddPost = /*#__PURE__*/function (_Component) {
       isLoadedUser: false,
       isLoadedCategory: false,
       user: {},
-      category: {}
+      category: {},
+      obj: {}
     };
     _this.read_user = _this.read_user.bind(_assertThisInitialized(_this));
     _this.read_category = _this.read_category.bind(_assertThisInitialized(_this));
     _this.loadNewCategory = _this.loadNewCategory.bind(_assertThisInitialized(_this));
+    _this.onChange = _this.onChange.bind(_assertThisInitialized(_this));
+    _this.selectCategory = _this.selectCategory.bind(_assertThisInitialized(_this));
+    _this.send = _this.send.bind(_assertThisInitialized(_this));
+    _this.sendPost = _this.send.bind(_assertThisInitialized(_this));
+    _this.updateUser = _this.updateUser.bind(_assertThisInitialized(_this));
     return _this;
   }
 
   _createClass(AddPost, [{
+    key: "onChange",
+    value: function onChange(e) {
+      this.state[e.target.name] = e.target.value;
+    }
+  }, {
+    key: "selectCategory",
+    value: function selectCategory(e) {
+      this.state.categoryId = e.target.id;
+      document.getElementById('category').innerHTML = e.target.innerText;
+      var myModalEl = document.getElementById('CategoryModal');
+      var modal = bootstrap.Modal.getInstance(myModalEl);
+      modal.hide();
+    }
+  }, {
     key: "componentDidMount",
     value: function componentDidMount() {
       this.read_user();
@@ -3915,20 +3964,19 @@ var AddPost = /*#__PURE__*/function (_Component) {
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("input", {
               type: "text",
               name: "title",
-              className: "field-set-box-title-input"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("small", {
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("b", {
-                id: "titleLength",
-                children: "70 "
-              }), "\u0437\u043D\u0430\u043A\u043E\u0432 \u043E\u0441\u0442\u0430\u043B\u043E\u0441\u044C"]
+              className: "field-set-box-title-input",
+              onChange: this.onChange,
+              value: this.state.title
             })]
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("label", {
               children: "\u0420\u0443\u0431\u0440\u0438\u043A\u0430*"
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("a", {
               href: "#",
+              id: "category",
               className: "Category",
               "data-bs-toggle": "modal",
+              name: "category",
               "data-bs-target": "#CategoryModal"
             })]
           })]
@@ -3940,11 +3988,8 @@ var AddPost = /*#__PURE__*/function (_Component) {
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("label", {
             className: "form-label",
             children: "\u041E\u043F\u0438\u0441\u0430\u043D\u0438\u0435*"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("textarea", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("small", {
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("b", {
-              id: "descriptionLength",
-              children: "9000 "
-            }), "\u0437\u043D\u0430\u043A\u043E\u0432 \u043E\u0441\u0442\u0430\u043B\u043E\u0441\u044C"]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("textarea", {
+            onChange: this.onChange
           })]
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
           className: "field-set-box",
@@ -3971,28 +4016,32 @@ var AddPost = /*#__PURE__*/function (_Component) {
               children: "\u041C\u0435\u0441\u0442\u043E\u043F\u043E\u043B\u043E\u0436\u0435\u043D\u0438\u0435*"
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("input", {
               type: "text",
-              className: "add-post-user-data"
+              className: "add-post-user-data",
+              defaultValue: this.state.location ? this.state.location : ''
             })]
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("label", {
               children: "\u041D\u043E\u043C\u0435\u0440 \u0442\u0435\u043B\u0435\u0444\u043E\u043D\u0430"
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("input", {
-              type: "text",
-              className: "add-post-user-data"
+              type: "tel",
+              className: "add-post-user-data",
+              defaultValue: this.state.user.tel ? this.state.user.tel : ''
             })]
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("label", {
               children: "Email-\u0430\u0434\u0440\u0435\u0441\u0441"
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("input", {
               type: "text",
-              className: "add-post-user-data"
+              className: "add-post-user-data",
+              defaultValue: this.state.user.email
             })]
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("label", {
               children: "\u041A\u043E\u043D\u0442\u0430\u043A\u0442\u043D\u043E\u0435 \u043B\u0438\u0446\u043E*"
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("input", {
               type: "text",
-              className: "add-post-user-data"
+              className: "add-post-user-data",
+              defaultValue: this.state.user.name
             })]
           })]
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
@@ -4001,7 +4050,8 @@ var AddPost = /*#__PURE__*/function (_Component) {
             className: "field-set-box-submit",
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("input", {
               type: "button",
-              value: "\u0414\u0430\u043B\u044C\u0448\u0435"
+              value: "\u0414\u0430\u043B\u044C\u0448\u0435",
+              onClick: this.send
             })
           })
         })]
@@ -4017,6 +4067,34 @@ var AddPost = /*#__PURE__*/function (_Component) {
         })
       });
     }
+  }, {
+    key: "send",
+    value: function send() {
+      this.state.obj = {
+        title: this.state.title,
+        category_id: this.state.categoryId,
+        author_id: this.state.user.id,
+        body: this.state.description
+      };
+      this.sendPost(this.state.obj);
+      this.updateUser();
+    }
+  }, {
+    key: "sendPost",
+    value: function sendPost(obj) {
+      fetch("/api/post", {
+        method: "POST",
+        headers: {
+          'Content-Type': "application/json"
+        },
+        body: JSON.stringify(obj)
+      }).then(function (r) {
+        return r.text();
+      }).then(console.log);
+    }
+  }, {
+    key: "updateUser",
+    value: function updateUser() {}
   }, {
     key: "read_user",
     value: function read_user() {
@@ -4074,7 +4152,7 @@ var AddPost = /*#__PURE__*/function (_Component) {
         className: "list-group",
         children: category.map(function (item) {
           return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("li", {
-            onClick: _this4.loadNewCategory,
+            onClick: _this4.selectCategory,
             id: item.id,
             className: "list-group-item list-group-item-action list-group-item-light",
             children: item.name
@@ -4093,6 +4171,13 @@ var AddPost = /*#__PURE__*/function (_Component) {
         console.log(res);
         document.getElementById("CategoryModalBody").innerText += _this5.renderCategory(res.category);
       });
+    }
+  }, {
+    key: "selectImage",
+    value: function selectImage() {
+      var input = document.createElement('input');
+      input.type = 'file';
+      input.click();
     }
   }]);
 

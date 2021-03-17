@@ -10,7 +10,13 @@ export default class Welcome extends Component {
     }
 
     render() {
-        return (<div></div>
+        return (<div className="welcome-page">
+                <div>
+                    <input type="text" name="search"/>
+                    <input type="text" name="city"/>
+                    <input type="button" value="Поиск"/>
+                </div>
+            </div>
         );
 
     }

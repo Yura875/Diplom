@@ -546,7 +546,10 @@ hr:not([size]) {
     line-height: 1.25;
     border-radius: 4px;
 }
-
+.Category:hover{
+    color: #acacac;
+    text-decoration: none;
+}
 .Category:before,
 .Category:after {
     content: '';
