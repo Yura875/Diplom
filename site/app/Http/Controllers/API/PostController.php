@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
-use App\Models\Post;
+
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+use TCG\Voyager\Models\Post;
 
 class PostController extends Controller
 {
@@ -15,24 +17,30 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        return Post::create($request->all());
+        $post = new Post();
+        $post->title = $request->title;
+        $post->body = $request->body;
+        $post->author_id = $request->author_id;
+        $post->category_id = $request->category_id;
+        $post->slug = Str::slug($request->title);
+        $post->save();
+        return response(["status"=>1]);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -43,8 +51,8 @@ class PostController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -55,7 +63,7 @@ class PostController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

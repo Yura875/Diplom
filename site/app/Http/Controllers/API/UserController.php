@@ -88,6 +88,7 @@ class UserController extends Controller
         if (empty($user))
             return response(['status' => -1]);
         if (!empty($request->location)) {
+
             $user->location = $request->location;
         }
         if (!empty($request->name)) {
