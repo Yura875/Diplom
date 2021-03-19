@@ -105,7 +105,7 @@ export default class Profile extends Component {
                         </div>
                     </div>
                     <div className="wrapper" id="activeTab">
-                        <Posts/>
+                        <Posts user={this.state.user}/>
                     </div>
 
                 </div>
@@ -130,6 +130,7 @@ export default class Profile extends Component {
             e.target.className = "active";
             name = e.target.name;
         }
+
         switch (name) {
             case "posts":
                 document.getElementById("messagesLi").className = "";

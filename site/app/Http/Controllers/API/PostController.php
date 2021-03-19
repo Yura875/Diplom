@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use TCG\Voyager\Models\Post;
 
@@ -33,10 +34,16 @@ class PostController extends Controller
         $post->author_id = $request->author_id;
         $post->category_id = $request->category_id;
         $post->slug = Str::slug($request->title);
+        $post->price = $request->price;
         $post->save();
-        return response(["status"=>1]);
+        return response(["status"=>1,"post"=>$post]);
     }
 
+    public function byUser($id){
+
+
+       return DB::select("SELECT p.id,p.category_id,p.title,p.body,p.slug,p.status,i.ImageName FROM posts as p LEFT JOIN images i on i.post_id=p.id WHERE  p.author_id=$id");
+    }
     /**
      * Display the specified resource.
      *

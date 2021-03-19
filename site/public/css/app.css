@@ -10752,27 +10752,4 @@ hr:not([size]) {
 .Alternative {
     display: grid;
 }
-.modal1{
-    width: 100%;
-    height: 100%;
-    background-color:rgba(0,0,0,.4) ;
-    position: fixed;
-    margin: auto;
-    top: 0;
-    left: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: .5s;
-    transform: scale(0);
-}
-.modal1.active{
-    transform: scale(1);
-}
-.modal_content{
-    padding: 20px;
-    border-radius: 4px;
-    background-color: #fff;
-
-}
 

@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import Util from "../../util/util";
-import CategoryItem from "./categoryItem";
+
 
 export default class AddPost extends Component {
     constructor(props) {
@@ -13,8 +13,10 @@ export default class AddPost extends Component {
             user: {},
             category: {},
             obj: {},
-            files: {},
-            filesCount:0
+            files: [],
+            postId: 0,
+            isLoadedCitys: false,
+            citys: []
 
 
         }
@@ -26,6 +28,9 @@ export default class AddPost extends Component {
         this.send = this.send.bind(this);
         this.selectImage = this.selectImage.bind(this);
         this.updateUser = this.updateUser.bind(this);
+        this.sendFile = this.sendFile.bind(this);
+        this.loadCitys = this.loadCitys.bind(this);
+        this.selectLocation = this.selectLocation.bind(this);
 
 
     }
@@ -45,7 +50,8 @@ export default class AddPost extends Component {
 
 
     componentDidMount() {
-        this.read_user()
+        this.read_user();
+
     }
 
     render() {
@@ -62,6 +68,22 @@ export default class AddPost extends Component {
                             </div>
                             <div className="modal-body d-flex" id="CategoryModalBody">
                                 {(this.state.isLoadedCategory) ? this.renderCategory(this.state.category) : ''}
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div className="modal fade" id="LocationModal" tabIndex="-1" aria-labelledby="LocationModalLabel"
+                     aria-hidden="true">
+                    <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                        <div className="modal-content">
+                            <div className="modal-header">
+                                <h5 className="modal-title" id="exampleModalLabel">Местоположение</h5>
+                                <input type="button" className="btn-close" data-bs-dismiss="modal"
+                                       aria-label="Close"/>
+                            </div>
+                            <div className="modal-body" id="LocationModalBody">
+                                {(this.state.isLoadedCitys) ? this.renderCitys() : ''}
 
                             </div>
                         </div>
@@ -87,6 +109,9 @@ export default class AddPost extends Component {
                     <textarea onChange={this.onChange} name="description">
 
                 </textarea>
+                    <div className="field-set-box-title">Цена</div>
+                    <label className="form-label">Цена*</label>
+                    <input type="text" name="price" onChange={this.onChange} className="field-set-box-title-input"/>
                 </div>
                 <div className="field-set-box">
                     <div className="field-set-box-title">Фотографии</div>
@@ -183,8 +208,8 @@ export default class AddPost extends Component {
                     </div>
                     <div>
                         <label>Местоположение*</label>
-                        <input type="text" className="add-post-user-data"
-                               defaultValue={this.state.user.location} onChange={this.onChange} name="location"/>
+                        <a href="#" className="Category" data-bs-toggle="modal" name="location" id="location"
+                           data-bs-target="#LocationModal"></a>
                     </div>
                     <div>
                         <label>Номер телефона</label>
@@ -201,7 +226,7 @@ export default class AddPost extends Component {
                 </div>
                 <div className="field-set-box">
                     <div className="field-set-box-submit">
-                        <input type="button" value="Дальше" onClick={this.send}/>
+                        <input type="button" value="Сохранить" className="new-posts-profile" onClick={this.send}/>
                     </div>
                 </div>
 
@@ -215,6 +240,22 @@ export default class AddPost extends Component {
         );
     }
 
+    sendFile(postId) {
+        console.log(postId);
+        let formData = new FormData();
+        formData.append("_token", this.csrf);
+        formData.append("post_id", postId);
+        for (let i in this.state.files) {
+            formData.append("Image" + i, this.state.files[i]);
+        }
+        axios.post("/api/file", formData).then(response=>{
+            this.updateUser();
+        }
+
+    )
+
+
+    }
 
     send() {
 
@@ -224,15 +265,23 @@ export default class AddPost extends Component {
             category_id: this.state.categoryId,
             author_id: this.state.user.id,
             body: this.state.description,
+            price: this.state.price,
 
         });
+       /* fetch("/api/posts",{
+            method:"POST",
+            body:toSend,
+            headers:{
+                'Content-Type':'application/json'
+            }
+        }).then(r=>r.text()).then(console.log);*/
         axios.post('/api/posts', toSend, {
             headers: {
                 'Content-Type': 'application/json'
             }
         }).then(response => {
             if (response.data.status == 1) {
-                this.updateUser();
+               this.sendFile(response.data.post.id);
 
             }
         }).catch(error => {
@@ -252,7 +301,7 @@ export default class AddPost extends Component {
                 'Content-Type': 'application/json'
             }
         }).then(r => {
-            console.log(r);
+          window.location="/myaccount";
         })
     }
 
@@ -274,6 +323,7 @@ export default class AddPost extends Component {
 
                 this.setState({user: res.user, isLoadedUser: true});
                 this.read_category(null);
+                this.loadCitys();
             }
 
         });
@@ -311,13 +361,42 @@ export default class AddPost extends Component {
         let input = document.createElement('input');
         input.type = 'file';
         input.addEventListener('change', (e) => {
-            if(this.state.filesCount<8){
-                
+            if (this.state.files.length < 8) {
+                this.state.files[this.state.files.length] = e.target.files[0];
+                console.log(this.state.files);
             }
 
+
         });
-    input.click();
+        input.click();
 
-}
+    }
 
+    selectLocation(e) {
+        this.state.location = e.target.innerText;
+        document.getElementById('location').innerHTML = e.target.innerText;
+        let myModalEl = document.getElementById('LocationModal');
+        let modal = bootstrap.Modal.getInstance(myModalEl);
+        modal.hide();
+
+    }
+
+    renderCitys() {
+        return (
+            <ul className="list-group list-group-flush">
+                {this.state.citys.map(item => (
+
+                    <li onClick={this.selectLocation} id={item.id}
+                        className="list-group-item text-center"
+                        key={item.id.toString()}>{item.name}</li>
+                ))}
+            </ul>
+        );
+    }
+
+    loadCitys() {
+        axios.get('/api/citys').then(response => {
+            this.setState({citys: response.data, isLoadedCitys: true});
+        });
+    }
 }
