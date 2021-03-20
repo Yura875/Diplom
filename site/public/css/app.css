@@ -10715,9 +10715,9 @@ hr:not([size]) {
 
     background: #f8fafc;
     position: relative;
-    width: 15.45%;
+    width: 40%;
     color: #406367;
-    min-width: 159px;
+
     font-size: 14px;
     cursor: pointer;
     border-radius: 4px;
@@ -10751,5 +10751,14 @@ hr:not([size]) {
 
 .Alternative {
     display: grid;
+}
+.image-preview{
+    display: flex;
+    margin: 5px;
+    border-radius: 4px;
+}
+.image-preview img{
+    width: 159px;
+    height: 120px;
 }
 

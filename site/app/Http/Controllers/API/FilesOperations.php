@@ -26,15 +26,16 @@ class FilesOperations extends Controller
      */
     public function store(Request $request)
     {
-        for ($i = 0; $i < $request->files->count(); $i++) {
-            $path= $request->file('Image'.$i)->store('public/Images/Posts');
-            $path = str_replace("public", "", "/storage" . $path);
-            $image=new Image();
-            $image->ImageName=$path;
-            $image->post_id=$request->post_id;
-            $image->save();
-        }
-        return response(["status"=>1]);
+
+
+        $path = $request->file('Image')->store('public/Images/Posts');
+        $path = str_replace("public", "", "/storage" . $path);
+        /* $image=new Image();
+         $image->name=$path;
+         $image->post_id=$request->post_id;
+         $image->save();*/
+
+        return response(["status" => 1, "path" => $path]);
 
     }
 

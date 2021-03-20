@@ -2695,7 +2695,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
 /* harmony import */ var _authorization__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./authorization */ "./resources/js/components/account/authorization.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _util_util__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../util/util */ "./resources/js/components/util/util.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -2717,6 +2718,7 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
 
 
 
@@ -2754,13 +2756,13 @@ var Registration = /*#__PURE__*/function (_Component) {
       document.getElementById("Pass2").value = "";
       document.getElementById("reg").className = "";
       document.getElementById("auth").className = "active";
-      react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_authorization__WEBPACK_IMPORTED_MODULE_2__.default, {}), document.getElementById("mode"));
+      react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_authorization__WEBPACK_IMPORTED_MODULE_2__.default, {}), document.getElementById("mode"));
     }
   }, {
     key: "onChange",
     value: function onChange(e) {
       this.state[e.target.name] = e.target.value;
-      Util.setDivError(e.target.name + "Err", "");
+      _util_util__WEBPACK_IMPORTED_MODULE_3__.default.setDivError(e.target.name + "Err", "");
     }
   }, {
     key: "setDivError",
@@ -2777,14 +2779,14 @@ var Registration = /*#__PURE__*/function (_Component) {
   }, {
     key: "render",
     value: function render() {
-      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
         id: "reg-block",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
           className: "auth-block",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
             className: "form-label",
             children: "\u0423\u043A\u0430\u0436\u0438\u0442\u0435 \u0432\u0430\u0448 email"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
             type: "email",
             title: "\u0423\u043A\u0430\u0436\u0438\u0442\u0435 \u0432\u0430\u0448 email",
             name: "email",
@@ -2792,42 +2794,42 @@ var Registration = /*#__PURE__*/function (_Component) {
             onChange: this.onChange,
             placeholder: "\u0423\u043A\u0430\u0436\u0438\u0442\u0435 \u0432\u0430\u0448 email",
             required: true
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
             id: "emailErr"
           })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
           className: "auth-block",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
             className: "form-label",
             children: "\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u0441\u0432\u043E\u0439 \u043F\u0430\u0440\u043E\u043B\u044C"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
             type: "password",
             title: "\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u0441\u0432\u043E\u0439 \u043F\u0430\u0440\u043E\u043B\u044C",
             name: "password",
             id: "Pass1",
             placeholder: "\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u0441\u0432\u043E\u0439 \u043F\u0430\u0440\u043E\u043B\u044C",
             onChange: this.onChange
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
             id: "passwordErr"
           })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
           className: "auth-block",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
             className: "form-label",
             children: "\u041F\u043E\u0432\u0442\u043E\u0440\u0438\u0442\u0435 \u0441\u0432\u043E\u0439 \u043F\u0430\u0440\u043E\u043B\u044C"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
             type: "password",
             title: "\u041F\u043E\u0432\u0442\u043E\u0440\u0438\u0442\u0435 \u0441\u0432\u043E\u0439 \u043F\u0430\u0440\u043E\u043B\u044C",
             name: "password2",
             id: "Pass2",
             placeholder: "\u041F\u043E\u0432\u0442\u043E\u0440\u0438\u0442\u0435 \u0441\u0432\u043E\u0439 \u043F\u0430\u0440\u043E\u043B\u044C",
             onChange: this.onChange
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
             id: "password2Err"
           })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
           className: "auth-block",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
             type: "button",
             onClick: this.reg_user,
             className: "Login-Button",
@@ -2849,7 +2851,7 @@ var Registration = /*#__PURE__*/function (_Component) {
       };
 
       if (!this.state.obj.email || 0 === this.state.obj.email.length) {
-        Util.setDivError("emailErr", "Это поле нужно заполнить");
+        _util_util__WEBPACK_IMPORTED_MODULE_3__.default.setDivError("emailErr", "Это поле нужно заполнить");
         return;
       }
 
@@ -2857,17 +2859,17 @@ var Registration = /*#__PURE__*/function (_Component) {
       var valid = re.test(this.state.obj.email);
 
       if (!valid) {
-        Util.setDivError("emailErr", "Неправильный формат email");
+        _util_util__WEBPACK_IMPORTED_MODULE_3__.default.setDivError("emailErr", "Неправильный формат email");
         return;
       }
 
       if (this.state.obj.password.length < 8) {
-        Util.setDivError("passwordErr", "Короткий пароль");
+        _util_util__WEBPACK_IMPORTED_MODULE_3__.default.setDivError("passwordErr", "Короткий пароль");
         return;
       }
 
       if (this.state.obj.password != this.state.obj.password_confirmation) {
-        Util.setDivError("passwordErr", "Пароли не совпадают");
+        _util_util__WEBPACK_IMPORTED_MODULE_3__.default.setDivError("passwordErr", "Пароли не совпадают");
         return;
       }
 
@@ -3573,14 +3575,18 @@ var AddPost = /*#__PURE__*/function (_Component) {
       category: {},
       obj: {},
       files: [],
+      filesName: [],
       postId: 0,
       isLoadedCitys: false,
-      citys: []
+      citys: [],
+      errors: {}
     };
     _this.read_user = _this.read_user.bind(_assertThisInitialized(_this));
     _this.read_category = _this.read_category.bind(_assertThisInitialized(_this));
     _this.loadNewCategory = _this.loadNewCategory.bind(_assertThisInitialized(_this));
     _this.onChange = _this.onChange.bind(_assertThisInitialized(_this));
+    _this.onChangeTel = _this.onChangeTel.bind(_assertThisInitialized(_this));
+    _this.onChangePrice = _this.onChangePrice.bind(_assertThisInitialized(_this));
     _this.selectCategory = _this.selectCategory.bind(_assertThisInitialized(_this));
     _this.send = _this.send.bind(_assertThisInitialized(_this));
     _this.selectImage = _this.selectImage.bind(_assertThisInitialized(_this));
@@ -3594,7 +3600,15 @@ var AddPost = /*#__PURE__*/function (_Component) {
   _createClass(AddPost, [{
     key: "onChange",
     value: function onChange(e) {
-      this.state[e.target.name] = e.target.value;
+      if (_util_util__WEBPACK_IMPORTED_MODULE_1__.default.isValid(e.target.value)) {
+        this.state[e.target.name] = e.target.value;
+        this.state.errors[e.target.name] = null;
+        this.setState({});
+      } else {
+        this.state[e.target.name] = e.target.value;
+        this.state.errors[e.target.name] = "Данное поле содержит недопустимые символы";
+        this.setState({});
+      }
     }
   }, {
     key: "selectCategory",
@@ -3690,6 +3704,9 @@ var AddPost = /*#__PURE__*/function (_Component) {
               className: "field-set-box-title-input",
               onChange: this.onChange,
               value: this.state.title
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+              className: this.state.errors.title != null ? "text-danger d-block" : "",
+              children: this.state.errors.title != null ? this.state.errors.title : ''
             })]
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
@@ -3715,6 +3732,9 @@ var AddPost = /*#__PURE__*/function (_Component) {
             onChange: this.onChange,
             name: "description"
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+            className: this.state.errors.description != null ? "text-danger d-block" : "",
+            children: this.state.errors.description != null ? this.state.errors.description : ''
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
             className: "field-set-box-title",
             children: "\u0426\u0435\u043D\u0430"
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
@@ -3723,8 +3743,11 @@ var AddPost = /*#__PURE__*/function (_Component) {
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
             type: "text",
             name: "price",
-            onChange: this.onChange,
+            onChange: this.onChangePrice,
             className: "field-set-box-title-input"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+            className: this.state.errors.price != null ? "text-danger d-block" : "",
+            children: this.state.errors.price != null ? this.state.errors.price : ''
           })]
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
           className: "field-set-box",
@@ -3743,6 +3766,7 @@ var AddPost = /*#__PURE__*/function (_Component) {
                   className: "add-image main-image",
                   onClick: this.selectImage,
                   name: "image",
+                  id: "image0",
                   children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("a", {
                     children: "\u043D\u0430\u0436\u043C\u0438\u0442\u0435, \u0447\u0442\u043E\u0431\u044B \u0434\u043E\u0431\u0430\u0432\u0438\u0442\u044C \u0433\u043B\u0430\u0432\u043D\u043E\u0435 \u0444\u043E\u0442\u043E"
                   })
@@ -3750,6 +3774,7 @@ var AddPost = /*#__PURE__*/function (_Component) {
                   className: "add-image",
                   onClick: this.selectImage,
                   name: "image",
+                  id: "image1",
                   children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("a", {
                     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("svg", {
                       "aria-hidden": "true",
@@ -3771,6 +3796,7 @@ var AddPost = /*#__PURE__*/function (_Component) {
                   className: "add-image",
                   onClick: this.selectImage,
                   name: "image",
+                  id: "image2",
                   children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("a", {
                     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("svg", {
                       "aria-hidden": "true",
@@ -3792,6 +3818,7 @@ var AddPost = /*#__PURE__*/function (_Component) {
                   className: "add-image",
                   onClick: this.selectImage,
                   name: "image",
+                  id: "image3",
                   children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("a", {
                     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("svg", {
                       "aria-hidden": "true",
@@ -3816,6 +3843,7 @@ var AddPost = /*#__PURE__*/function (_Component) {
                   className: "add-image",
                   onClick: this.selectImage,
                   name: "image",
+                  id: "image4",
                   children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("a", {
                     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("svg", {
                       "aria-hidden": "true",
@@ -3837,6 +3865,7 @@ var AddPost = /*#__PURE__*/function (_Component) {
                   className: "add-image",
                   onClick: this.selectImage,
                   name: "image",
+                  id: "image5",
                   children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("a", {
                     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("svg", {
                       "aria-hidden": "true",
@@ -3858,6 +3887,7 @@ var AddPost = /*#__PURE__*/function (_Component) {
                   className: "add-image",
                   onClick: this.selectImage,
                   name: "image",
+                  id: "image6",
                   children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("svg", {
                     "aria-hidden": "true",
                     focusable: "false",
@@ -3877,6 +3907,7 @@ var AddPost = /*#__PURE__*/function (_Component) {
                   className: "add-image",
                   onClick: this.selectImage,
                   name: "image",
+                  id: "image7",
                   children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("a", {
                     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("svg", {
                       "aria-hidden": "true",
@@ -3915,7 +3946,8 @@ var AddPost = /*#__PURE__*/function (_Component) {
               "data-bs-toggle": "modal",
               name: "location",
               id: "location",
-              "data-bs-target": "#LocationModal"
+              "data-bs-target": "#LocationModal",
+              children: this.state.user.location ? this.state.user.location : ''
             })]
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
@@ -3924,8 +3956,11 @@ var AddPost = /*#__PURE__*/function (_Component) {
               type: "tel",
               className: "add-post-user-data",
               defaultValue: this.state.user.tel ? this.state.user.tel : '',
-              onChange: this.onChange,
+              onChange: this.onChangeTel,
               name: "tel"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+              className: this.state.errors.tel != null ? "text-danger d-block" : "",
+              children: this.state.errors.tel != null ? this.state.errors.tel : ''
             })]
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
@@ -3936,6 +3971,9 @@ var AddPost = /*#__PURE__*/function (_Component) {
               defaultValue: this.state.user.name,
               onChange: this.onChange,
               name: "name"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+              className: this.state.errors.name != null ? "text-danger d-block" : "",
+              children: this.state.errors.name != null ? this.state.errors.name : ''
             })]
           })]
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
@@ -3963,54 +4001,116 @@ var AddPost = /*#__PURE__*/function (_Component) {
       });
     }
   }, {
+    key: "onChangeTel",
+    value: function onChangeTel(e) {
+      if (_util_util__WEBPACK_IMPORTED_MODULE_1__.default.isValidTel(e.target.value)) {
+        this.state[e.target.name] = e.target.value;
+        this.state.errors[e.target.name] = null;
+        this.setState({});
+      } else {
+        this.state[e.target.name] = e.target.value;
+        this.state.errors[e.target.name] = "Введите корректный номер. Пример: 8 XXX XXX XX XX";
+        this.setState({});
+      }
+    }
+  }, {
+    key: "onChangePrice",
+    value: function onChangePrice(e) {
+      if (_util_util__WEBPACK_IMPORTED_MODULE_1__.default.isNumber(e.target.value)) {
+        this.state[e.target.name] = e.target.value;
+        this.state.errors[e.target.name] = null;
+        this.setState({});
+      } else {
+        this.state[e.target.name] = e.target.value;
+        this.state.errors[e.target.name] = "Введите правильную цену, например: 23 или123.33";
+        this.setState({});
+      }
+    }
+  }, {
     key: "sendFile",
-    value: function sendFile(postId) {
+    value: function sendFile(file) {
       var _this2 = this;
 
-      console.log(postId);
       var formData = new FormData();
       formData.append("_token", this.csrf);
-      formData.append("post_id", postId);
-
-      for (var i in this.state.files) {
-        formData.append("Image" + i, this.state.files[i]);
-      }
-
+      formData.append('Image', file);
       axios.post("/api/file", formData).then(function (response) {
-        _this2.updateUser();
+        _this2.state.files.push(response.data.path);
+
+        var imageNumber = _this2.state.files.length - 1;
+        var liImage = document.getElementById("image" + imageNumber);
+        liImage.innerHTML = '<img src="' + _this2.state.files[imageNumber] + '"/>';
+        liImage.className = "image-preview";
       });
     }
   }, {
     key: "send",
     value: function send() {
-      var _this3 = this;
+      if (this.state.title.length < 10) {
+        this.state.errors.title = "Заголовок должен быть не короче 10 знаков";
+        this.setState({});
+        return;
+      }
+
+      if (!_util_util__WEBPACK_IMPORTED_MODULE_1__.default.isValid(this.state.title)) {
+        this.state.errors.title = "Данное поле содержит недопустимые символы";
+        this.setState({});
+        return;
+      }
+
+      if (this.state.description.length < 40) {
+        this.state.errors.description = "Описание должно быть не короче 40 знаков";
+        this.setState({});
+        return;
+      }
+
+      if (!_util_util__WEBPACK_IMPORTED_MODULE_1__.default.isValid(this.state.description)) {
+        this.state.errors.description = "Данное поле содержит недопустимые символы";
+        this.setState({});
+        return;
+      }
+
+      if (!this.state.categoryId) {
+        this.state.errors.category = "Выберите рубрику";
+        this.setState({});
+        return;
+      }
+
+      if (!_util_util__WEBPACK_IMPORTED_MODULE_1__.default.isNumber(this.state.price)) {
+        this.state.errors.price = "Введите правильную цену, например: 23 или 123.33";
+        this.setState({});
+        return;
+      }
 
       var toSend = JSON.stringify({
         title: this.state.title,
         category_id: this.state.categoryId,
         author_id: this.state.user.id,
         body: this.state.description,
-        price: this.state.price
+        price: this.state.price,
+        images: this.state.files
       });
-      /* fetch("/api/posts",{
-           method:"POST",
-           body:toSend,
-           headers:{
-               'Content-Type':'application/json'
-           }
-       }).then(r=>r.text()).then(console.log);*/
-
-      axios.post('/api/posts', toSend, {
+      fetch('/api/posts', {
+        method: "POST",
         headers: {
           'Content-Type': 'application/json'
-        }
-      }).then(function (response) {
-        if (response.data.status == 1) {
-          _this3.sendFile(response.data.post.id);
-        }
-      })["catch"](function (error) {
-        console.log(error);
-      });
+        },
+        body: toSend
+      }).then(function (r) {
+        return r.text();
+      }).then(console.log);
+      /*
+      axios.post('/api/posts', toSend, {
+      headers: {
+      'Content-Type': 'application/json'
+      }
+      }).then(response => {
+      if (response.data.status == 1) {
+      this.updateUser();
+      }
+      }).catch(error => {
+      console.log(error);
+      });*/
     }
   }, {
     key: "updateUser",
@@ -4018,8 +4118,8 @@ var AddPost = /*#__PURE__*/function (_Component) {
       var toSend = JSON.stringify({
         _token: this.csrf,
         location: this.state.location,
-        tel: this.state.tel,
-        name: this.state.name
+        tel: _util_util__WEBPACK_IMPORTED_MODULE_1__.default.isValidTel(this.state.tel) ? this.state.tel : '',
+        name: _util_util__WEBPACK_IMPORTED_MODULE_1__.default.isValid(state.name) ? this.state.name : ''
       });
       axios.put('/api/user/' + this.state.user.id, toSend, {
         headers: {
@@ -4032,7 +4132,7 @@ var AddPost = /*#__PURE__*/function (_Component) {
   }, {
     key: "read_user",
     value: function read_user() {
-      var _this4 = this;
+      var _this3 = this;
 
       var user_token = _util_util__WEBPACK_IMPORTED_MODULE_1__.default.get_cookie("user");
 
@@ -4050,26 +4150,26 @@ var AddPost = /*#__PURE__*/function (_Component) {
           _util_util__WEBPACK_IMPORTED_MODULE_1__.default.incorrect_user();
           return;
         } else if (status == 1) {
-          _this4.setState({
+          _this3.setState({
             user: res.user,
             isLoadedUser: true
           });
 
-          _this4.read_category(null);
+          _this3.read_category(null);
 
-          _this4.loadCitys();
+          _this3.loadCitys();
         }
       });
     }
   }, {
     key: "read_category",
     value: function read_category() {
-      var _this5 = this;
+      var _this4 = this;
 
       fetch('/api/category/' + null).then(function (r) {
         return r.json();
       }).then(function (res) {
-        _this5.setState({
+        _this4.setState({
           isLoadedCategory: true,
           category: res.category
         });
@@ -4080,13 +4180,13 @@ var AddPost = /*#__PURE__*/function (_Component) {
   }, {
     key: "renderCategory",
     value: function renderCategory(category) {
-      var _this6 = this;
+      var _this5 = this;
 
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("ul", {
         className: "list-group",
         children: category.map(function (item) {
           return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("li", {
-            onClick: _this6.selectCategory,
+            onClick: _this5.selectCategory,
             id: item.id,
             className: "list-group-item list-group-item-action list-group-item-light",
             children: item.name
@@ -4097,26 +4197,25 @@ var AddPost = /*#__PURE__*/function (_Component) {
   }, {
     key: "loadNewCategory",
     value: function loadNewCategory(e) {
-      var _this7 = this;
+      var _this6 = this;
 
       fetch("/api/category/" + e.target.id).then(function (r) {
         return r.json();
       }).then(function (res) {
         console.log(res);
-        document.getElementById("CategoryModalBody").innerText += _this7.renderCategory(res.category);
+        document.getElementById("CategoryModalBody").innerText += _this6.renderCategory(res.category);
       });
     }
   }, {
     key: "selectImage",
     value: function selectImage() {
-      var _this8 = this;
+      var _this7 = this;
 
       var input = document.createElement('input');
       input.type = 'file';
       input.addEventListener('change', function (e) {
-        if (_this8.state.files.length < 8) {
-          _this8.state.files[_this8.state.files.length] = e.target.files[0];
-          console.log(_this8.state.files);
+        if (_this7.state.files.length < 8) {
+          _this7.sendFile(e.target.files[0]);
         }
       });
       input.click();
@@ -4133,13 +4232,13 @@ var AddPost = /*#__PURE__*/function (_Component) {
   }, {
     key: "renderCitys",
     value: function renderCitys() {
-      var _this9 = this;
+      var _this8 = this;
 
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("ul", {
         className: "list-group list-group-flush",
         children: this.state.citys.map(function (item) {
           return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("li", {
-            onClick: _this9.selectLocation,
+            onClick: _this8.selectLocation,
             id: item.id,
             className: "list-group-item text-center",
             children: item.name
@@ -4150,10 +4249,10 @@ var AddPost = /*#__PURE__*/function (_Component) {
   }, {
     key: "loadCitys",
     value: function loadCitys() {
-      var _this10 = this;
+      var _this9 = this;
 
       axios.get('/api/citys').then(function (response) {
-        _this10.setState({
+        _this9.setState({
           citys: response.data,
           isLoadedCitys: true
         });
@@ -5218,6 +5317,32 @@ var Util = /*#__PURE__*/function () {
 
       errDiv.className = "auth-block err-div";
       errDiv.innerHTML = msg;
+    }
+  }, {
+    key: "isValid",
+    value: function isValid(str) {
+      var iChars = "~`@№_#$%^&*+=[]\\\';/{}|\":<>?";
+
+      for (var i = 0; i < str.length; i++) {
+        if (iChars.indexOf(str.charAt(i)) != -1) {
+          return false;
+        }
+      }
+
+      return true;
+    }
+  }, {
+    key: "isValidTel",
+    value: function isValidTel(str) {
+      var re = /^\d[\d\(\)\ -]{10,14}\d$/;
+      return re.test(str);
+    }
+  }, {
+    key: "isNumber",
+    value: function isNumber(str) {
+      var value = parseFloat(str);
+      if (isNaN(value)) return false;
+      return true;
     }
   }]);
 

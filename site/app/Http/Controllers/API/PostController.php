@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 
+use App\Models\Image;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -28,6 +29,7 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+
         $post = new Post();
         $post->title = $request->title;
         $post->body = $request->body;
@@ -35,15 +37,23 @@ class PostController extends Controller
         $post->category_id = $request->category_id;
         $post->slug = Str::slug($request->title);
         $post->price = $request->price;
+        $post->image = ((!empty($request->images[0])) ? $request->images[0] : "/storage/Images/Posts/default.png");
         $post->save();
-        return response(["status"=>1,"post"=>$post]);
+
+        for ($i = 1; $i < count($request->images); $i++) {
+            $image = new Image();
+            $image->post_id = $post->id;
+            $image->name = $request->images[$i];
+            $image->save();
+        }
+
+        return response(["status" => 1, "post" => $post]);
     }
 
-    public function byUser($id){
-
-
-       return DB::select("SELECT p.id,p.category_id,p.title,p.body,p.slug,p.status,i.ImageName FROM posts as p LEFT JOIN images i on i.post_id=p.id WHERE  p.author_id=$id");
+    public function byUser($id)
+    {
     }
+
     /**
      * Display the specified resource.
      *

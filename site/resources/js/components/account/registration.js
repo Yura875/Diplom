@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import Authorization from "./authorization";
-
+import Util from "../util/util";
 export default class Registration extends Component {
     constructor(props) {
         super(props);

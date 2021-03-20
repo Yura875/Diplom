@@ -14,9 +14,12 @@ export default class AddPost extends Component {
             category: {},
             obj: {},
             files: [],
+            filesName: [],
             postId: 0,
+
             isLoadedCitys: false,
-            citys: []
+            citys: [],
+            errors: {}
 
 
         }
@@ -24,6 +27,8 @@ export default class AddPost extends Component {
         this.read_category = this.read_category.bind(this);
         this.loadNewCategory = this.loadNewCategory.bind(this);
         this.onChange = this.onChange.bind(this);
+        this.onChangeTel = this.onChangeTel.bind(this);
+        this.onChangePrice = this.onChangePrice.bind(this);
         this.selectCategory = this.selectCategory.bind(this);
         this.send = this.send.bind(this);
         this.selectImage = this.selectImage.bind(this);
@@ -36,7 +41,15 @@ export default class AddPost extends Component {
     }
 
     onChange(e) {
-        this.state[e.target.name] = e.target.value;
+        if (Util.isValid(e.target.value)) {
+            this.state[e.target.name] = e.target.value;
+            this.state.errors[e.target.name] = null;
+            this.setState({});
+        } else {
+            this.state[e.target.name] = e.target.value;
+            this.state.errors[e.target.name] = "Данное поле содержит недопустимые символы";
+            this.setState({});
+        }
     }
 
     selectCategory(e) {
@@ -57,6 +70,7 @@ export default class AddPost extends Component {
     render() {
         if (this.state.isLoadedUser)
             return (<div className="wrapper">
+
                 <div className="modal fade" id="CategoryModal" tabIndex="-1" aria-labelledby="CategoryModalLabel"
                      aria-hidden="true">
                     <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
@@ -82,6 +96,7 @@ export default class AddPost extends Component {
                                 <input type="button" className="btn-close" data-bs-dismiss="modal"
                                        aria-label="Close"/>
                             </div>
+
                             <div className="modal-body" id="LocationModalBody">
                                 {(this.state.isLoadedCitys) ? this.renderCitys() : ''}
 
@@ -91,11 +106,16 @@ export default class AddPost extends Component {
                 </div>
                 <h1>Подать объявление на OLX</h1>
                 <div className="field-set-box">
+
                     <div className="field-set-box-title">Заголовок</div>
                     <div>
                         <label className="form-label">Заголовок*</label>
                         <input type="text" name="title" className="field-set-box-title-input"
                                onChange={this.onChange} value={this.state.title}/>
+                        <div
+                            className={(this.state.errors.title != null) ? "text-danger d-block" : ""}>
+                            {(this.state.errors.title != null) ? this.state.errors.title : ''}
+                        </div>
                     </div>
                     <div>
                         <label>Рубрика*</label>
@@ -109,9 +129,19 @@ export default class AddPost extends Component {
                     <textarea onChange={this.onChange} name="description">
 
                 </textarea>
+                    <div
+                        className={(this.state.errors.description != null) ? "text-danger d-block" : ""}>
+                        {(this.state.errors.description != null) ? this.state.errors.description : ''}
+                    </div>
                     <div className="field-set-box-title">Цена</div>
                     <label className="form-label">Цена*</label>
-                    <input type="text" name="price" onChange={this.onChange} className="field-set-box-title-input"/>
+                    <input type="text" name="price" onChange={this.onChangePrice}
+                           className="field-set-box-title-input"/>
+                    <div
+                        className={(this.state.errors.price != null) ? "text-danger d-block" : ""}>
+                        {(this.state.errors.price != null) ? this.state.errors.price : ''}
+                    </div>
+
                 </div>
                 <div className="field-set-box">
                     <div className="field-set-box-title">Фотографии</div>
@@ -119,9 +149,10 @@ export default class AddPost extends Component {
                     <div id="imageMode">
                         <div>
                             <ul className="add-main-image-way">
-                                <li className="add-image main-image" onClick={this.selectImage} name="image"><a>нажмите,
+                                <li className="add-image main-image" onClick={this.selectImage} name="image"
+                                    id="image0"><a>нажмите,
                                     чтобы добавить главное фото</a></li>
-                                <li className="add-image" onClick={this.selectImage} name="image"><a>
+                                <li className="add-image" onClick={this.selectImage} name="image" id="image1"><a>
                                     <svg aria-hidden="true" focusable="false" data-prefix="fal" data-icon="camera"
                                          role="img"
                                          xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
@@ -131,7 +162,7 @@ export default class AddPost extends Component {
                                               className=""></path>
                                     </svg>
                                 </a></li>
-                                <li className="add-image" onClick={this.selectImage} name="image"><a>
+                                <li className="add-image" onClick={this.selectImage} name="image" id="image2"><a>
                                     <svg aria-hidden="true" focusable="false" data-prefix="fal" data-icon="camera"
                                          role="img"
                                          xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
@@ -141,7 +172,7 @@ export default class AddPost extends Component {
                                               className=""></path>
                                     </svg>
                                 </a></li>
-                                <li className="add-image" onClick={this.selectImage} name="image"><a>
+                                <li className="add-image" onClick={this.selectImage} name="image" id="image3"><a>
                                     <svg aria-hidden="true" focusable="false" data-prefix="fal" data-icon="camera"
                                          role="img"
                                          xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
@@ -155,7 +186,7 @@ export default class AddPost extends Component {
 
                             </ul>
                             <ul className="add-main-image-way">
-                                <li className="add-image" onClick={this.selectImage} name="image"><a>
+                                <li className="add-image" onClick={this.selectImage} name="image" id="image4"><a>
                                     <svg aria-hidden="true" focusable="false" data-prefix="fal" data-icon="camera"
                                          role="img"
                                          xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
@@ -165,7 +196,7 @@ export default class AddPost extends Component {
                                               className=""></path>
                                     </svg>
                                 </a></li>
-                                <li className="add-image" onClick={this.selectImage} name="image"><a>
+                                <li className="add-image" onClick={this.selectImage} name="image" id="image5"><a>
                                     <svg aria-hidden="true" focusable="false" data-prefix="fal" data-icon="camera"
                                          role="img"
                                          xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
@@ -175,7 +206,7 @@ export default class AddPost extends Component {
                                               className=""></path>
                                     </svg>
                                 </a></li>
-                                <li className="add-image" onClick={this.selectImage} name="image">
+                                <li className="add-image" onClick={this.selectImage} name="image" id="image6">
                                     <svg aria-hidden="true" focusable="false" data-prefix="fal" data-icon="camera"
                                          role="img"
                                          xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
@@ -185,7 +216,7 @@ export default class AddPost extends Component {
                                               className=""></path>
                                     </svg>
                                     <a></a></li>
-                                <li className="add-image" onClick={this.selectImage} name="image"><a>
+                                <li className="add-image" onClick={this.selectImage} name="image" id="image7"><a>
                                     <svg aria-hidden="true" focusable="false" data-prefix="fal" data-icon="camera"
                                          role="img"
                                          xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
@@ -209,19 +240,27 @@ export default class AddPost extends Component {
                     <div>
                         <label>Местоположение*</label>
                         <a href="#" className="Category" data-bs-toggle="modal" name="location" id="location"
-                           data-bs-target="#LocationModal"></a>
+                           data-bs-target="#LocationModal">{((this.state.user.location) ? this.state.user.location : '')}</a>
                     </div>
                     <div>
                         <label>Номер телефона</label>
                         <input type="tel" className="add-post-user-data"
                                defaultValue={((this.state.user.tel) ? this.state.user.tel : '')}
-                               onChange={this.onChange} name="tel"/>
+                               onChange={this.onChangeTel} name="tel"/>
+                        <div
+                            className={(this.state.errors.tel != null) ? "text-danger d-block" : ""}>
+                            {(this.state.errors.tel != null) ? this.state.errors.tel : ''}
+                        </div>
                     </div>
 
                     <div>
                         <label>Контактное лицо*</label>
                         <input type="text" className="add-post-user-data" defaultValue={this.state.user.name}
                                onChange={this.onChange} name="name"/>
+                        <div
+                            className={(this.state.errors.name != null) ? "text-danger d-block" : ""}>
+                            {(this.state.errors.name != null) ? this.state.errors.name : ''}
+                        </div>
                     </div>
                 </div>
                 <div className="field-set-box">
@@ -240,24 +279,81 @@ export default class AddPost extends Component {
         );
     }
 
-    sendFile(postId) {
-        console.log(postId);
+    onChangeTel(e) {
+        if (Util.isValidTel(e.target.value)) {
+            this.state[e.target.name] = e.target.value;
+            this.state.errors[e.target.name] = null;
+            this.setState({});
+        } else {
+            this.state[e.target.name] = e.target.value;
+            this.state.errors[e.target.name] = "Введите корректный номер. Пример: 8 XXX XXX XX XX";
+            this.setState({});
+        }
+    }
+
+    onChangePrice(e) {
+        if (Util.isNumber(e.target.value)) {
+            this.state[e.target.name] = e.target.value;
+            this.state.errors[e.target.name] = null;
+            this.setState({});
+        } else {
+            this.state[e.target.name] = e.target.value;
+            this.state.errors[e.target.name] = "Введите правильную цену, например: 23 или123.33";
+            this.setState({});
+        }
+    }
+
+    sendFile(file) {
+
         let formData = new FormData();
         formData.append("_token", this.csrf);
-        formData.append("post_id", postId);
-        for (let i in this.state.files) {
-            formData.append("Image" + i, this.state.files[i]);
-        }
-        axios.post("/api/file", formData).then(response=>{
-            this.updateUser();
-        }
+        formData.append('Image', file);
 
-    )
+        axios.post("/api/file", formData).then(response => {
+                this.state.files.push(response.data.path);
+                let imageNumber = this.state.files.length - 1;
+                let liImage = document.getElementById("image" + imageNumber);
+                liImage.innerHTML = '<img src="' + this.state.files[imageNumber] + '"/>';
+                liImage.className = "image-preview";
+            }
+        )
 
 
     }
 
     send() {
+
+        if (this.state.title.length < 10) {
+            this.state.errors.title = "Заголовок должен быть не короче 10 знаков";
+            this.setState({});
+            return;
+        }
+        if (!Util.isValid(this.state.title)) {
+            this.state.errors.title = "Данное поле содержит недопустимые символы";
+            this.setState({});
+            return;
+        }
+        if (this.state.description.length < 40) {
+            this.state.errors.description = "Описание должно быть не короче 40 знаков";
+            this.setState({});
+            return;
+        }
+        if (!Util.isValid(this.state.description)) {
+            this.state.errors.description = "Данное поле содержит недопустимые символы";
+            this.setState({});
+            return;
+        }
+        if (!this.state.categoryId) {
+            this.state.errors.category = "Выберите рубрику";
+            this.setState({});
+            return;
+        }
+
+        if (!Util.isNumber(this.state.price)) {
+            this.state.errors.price = "Введите правильную цену, например: 23 или 123.33";
+            this.setState({});
+            return;
+        }
 
 
         let toSend = JSON.stringify({
@@ -266,42 +362,46 @@ export default class AddPost extends Component {
             author_id: this.state.user.id,
             body: this.state.description,
             price: this.state.price,
+            images: this.state.files
 
         });
-       /* fetch("/api/posts",{
+
+        fetch('/api/posts',{
             method:"POST",
-            body:toSend,
             headers:{
                 'Content-Type':'application/json'
-            }
-        }).then(r=>r.text()).then(console.log);*/
+            },
+            body:toSend
+        }).then(r=>r.text()).then(console.log);/*
         axios.post('/api/posts', toSend, {
             headers: {
                 'Content-Type': 'application/json'
             }
         }).then(response => {
-            if (response.data.status == 1) {
-               this.sendFile(response.data.post.id);
 
+            if (response.data.status == 1) {
+                this.updateUser();
             }
+
+
         }).catch(error => {
             console.log(error);
-        });
+        });*/
     }
 
     updateUser() {
         let toSend = JSON.stringify({
             _token: this.csrf,
             location: this.state.location,
-            tel: this.state.tel,
-            name: this.state.name
+            tel: (Util.isValidTel(this.state.tel) ? this.state.tel : ''),
+            name: ((Util.isValid(state.name)) ? this.state.name : '')
         });
         axios.put('/api/user/' + this.state.user.id, toSend, {
             headers: {
                 'Content-Type': 'application/json'
             }
         }).then(r => {
-          window.location="/myaccount";
+            window.location = "/myaccount";
         })
     }
 
@@ -362,8 +462,7 @@ export default class AddPost extends Component {
         input.type = 'file';
         input.addEventListener('change', (e) => {
             if (this.state.files.length < 8) {
-                this.state.files[this.state.files.length] = e.target.files[0];
-                console.log(this.state.files);
+                this.sendFile(e.target.files[0]);
             }
 
 

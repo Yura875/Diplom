@@ -35,8 +35,8 @@ export default class Util {
     static incorrect_user() {
         let today = new Date();
         today.setHours(today.getHours() + 1);
-        let path=window.location.pathname.substr(1);
-        Util.set_cookie("path",path, {expires: today})
+        let path = window.location.pathname.substr(1);
+        Util.set_cookie("path", path, {expires: today})
         window.location = "/account";
     }
 
@@ -47,5 +47,28 @@ export default class Util {
         }
         errDiv.className = "auth-block err-div";
         errDiv.innerHTML = msg;
+    }
+
+    static isValid(str) {
+        var iChars = "~`@№_#$%^&*+=[]\\\';/{}|\":<>?";
+
+        for (var i = 0; i < str.length; i++) {
+            if (iChars.indexOf(str.charAt(i)) != -1) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    static isValidTel(str) {
+        let re = /^\d[\d\(\)\ -]{10,14}\d$/;
+        return re.test(str);
+    }
+
+    static isNumber(str) {
+        let value = parseFloat(str);
+        if (isNaN(value))
+            return false;
+        return true;
     }
 }
