@@ -366,13 +366,7 @@ export default class AddPost extends Component {
 
         });
 
-        fetch('/api/posts',{
-            method:"POST",
-            headers:{
-                'Content-Type':'application/json'
-            },
-            body:toSend
-        }).then(r=>r.text()).then(console.log);/*
+
         axios.post('/api/posts', toSend, {
             headers: {
                 'Content-Type': 'application/json'
@@ -386,7 +380,7 @@ export default class AddPost extends Component {
 
         }).catch(error => {
             console.log(error);
-        });*/
+        });
     }
 
     updateUser() {
@@ -426,6 +420,8 @@ export default class AddPost extends Component {
                 this.loadCitys();
             }
 
+        }).catch(error=>{
+            Util.incorrect_user();
         });
     }
 

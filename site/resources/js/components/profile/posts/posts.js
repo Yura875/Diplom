@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import PostItem from "./postItem";
 
 export default class Posts extends Component {
     constructor(props) {
@@ -20,9 +21,9 @@ export default class Posts extends Component {
         if (this.state.isLoadedPosts) {
             if (this.state.posts.length > 0) {
 
-             return    this.renderPosts();
+                return this.renderPosts();
             } else {
-               return  this.renderNoPosts();
+                return this.renderNoPosts();
             }
         }
         return (
@@ -47,11 +48,16 @@ export default class Posts extends Component {
     readPosts() {
 
         axios.get("/api/posts/byUser/" + this.props.user.id).then(response => {
-            this.setState({posts: response.data,isLoadedPosts:true});
+            console.log(response);
+            this.setState({posts: response.data, isLoadedPosts: true});
         });
     }
 
     renderPosts() {
-        return (<div>Posts</div>);
+        return (<ul className="list-group posts-list">
+            {this.state.posts.map(item => (
+                <PostItem post={item}/>
+            ))}
+        </ul>);
     }
 }

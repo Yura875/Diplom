@@ -546,10 +546,12 @@ hr:not([size]) {
     line-height: 1.25;
     border-radius: 4px;
 }
-.Category:hover{
+
+.Category:hover {
     color: #acacac;
     text-decoration: none;
 }
+
 .Category:before,
 .Category:after {
     content: '';
@@ -733,25 +735,79 @@ hr:not([size]) {
     text-align: center;
     padding: 3% 1%;
 }
+
 .add-image svg {
     width: 32px;
     height: 32px;
     color: #406367;
     text-align: center;
     position: absolute;
-    top:40%;
+    top: 40%;
     left: 40%;
 }
 
 .Alternative {
     display: grid;
 }
-.image-preview{
+
+.image-preview {
     display: flex;
     margin: 5px;
     border-radius: 4px;
 }
-.image-preview img{
+
+.image-preview img {
     width: 159px;
     height: 120px;
+}
+
+
+.posts-list li {
+    display: flex;
+    width: 80%;
+    margin: auto;
+}
+
+.posts-list b {
+   font-size:16px ;
+    height: 5%;
+    color: #000;
+}
+.main-photo{
+    width: 30%;
+    height: 30%;
+}
+.posts-list span{
+    font-size: 24px;
+    vertical-align: middle;
+    margin: 0 10px;
+}
+.edit-button{
+    border: 2px solid  #002f34;
+    border-radius:4px ;
+    background: #fff;
+    font-size: 16px;
+    padding: 5px;
+    margin: 5px;
+    transition: .5s;
+}
+.edit-button:hover{
+
+    background: #002f34;
+    color: #fff;
+}
+.deactivate-button{
+    border: 2px solid  #002f34;
+    border-radius:4px ;
+    color: #fff;
+    font-size: 16px;
+    background: #002f34;
+    padding: 5px;
+    margin: 5px;
+    transition: .5s;
+}
+.deactivate-button:hover{
+
+    background: #fff;
+    color: #002f34;
 }

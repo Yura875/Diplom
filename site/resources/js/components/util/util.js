@@ -71,4 +71,9 @@ export default class Util {
             return false;
         return true;
     }
+    static parseDate(date){
+        let t = date.split(/[- :]/);
+        let d=t[2].split("T")[0]+"/"+t[1];
+        return d
+    }
 }

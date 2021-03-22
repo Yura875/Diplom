@@ -28,6 +28,7 @@
     },
     "dependencies": {
         "@fancyapps/fancybox": "^3.5.7",
+        "moment": "^2.29.1",
         "react-fancybox": "^0.2.5"
     }
 }

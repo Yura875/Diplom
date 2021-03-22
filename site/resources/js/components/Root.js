@@ -11,6 +11,7 @@ import ForgotPassword from "./account/forgotPassword";
 import Footer from "./layouts/Footer";
 import AddPost from "./profile/addPost/addPost";
 import FileOperation from "./tmp/fileOperation";
+import Post from "./posts/post";
 
 function Root() {
     return (
@@ -25,6 +26,7 @@ function Root() {
                 <Route path="/myaccount" component={Profile}/>
 
                 <Route path="/addPost" component={AddPost}/>
+                <Route path="/post/:slug/:id" component={Post}/>
 
 
                 <Route path="/tmp/fileOperation" component={FileOperation}/>

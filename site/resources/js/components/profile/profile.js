@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import Util from "../util/util";
-import Posts from "./posts";
+import Posts from "./posts/posts";
 import ReactDOM from "react-dom";
 import Authorization from "../account/authorization";
 import Registration from "../account/registration";

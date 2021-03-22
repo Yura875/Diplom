@@ -52,6 +52,8 @@ class PostController extends Controller
 
     public function byUser($id)
     {
+        return Post::where('author_id',$id)->orderBy('created_at','desc')->get();
+
     }
 
     /**
