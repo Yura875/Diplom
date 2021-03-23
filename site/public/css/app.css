@@ -10817,4 +10817,22 @@ hr:not([size]) {
     background: #fff;
     color: #002f34;
 }
+.post-info{
+    font-size: 16px;
+}
+.post-info span{
+    margin: 10px;
+}
+.post-info b{
+    border: 2px solid #bebebe;
+    padding:5px 10px;
+    border-radius: 4px;
+}
+.post-user-info{
+    float: right;
+}
+.post-user-info img {
+width: 50px;
+    height: 50px;
+}
 

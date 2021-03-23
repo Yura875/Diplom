@@ -3558,22 +3558,169 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
 var Post = /*#__PURE__*/function (_Component) {
   _inherits(Post, _Component);
 
   var _super = _createSuper(Post);
 
-  function Post() {
+  function Post(props) {
+    var _this;
+
     _classCallCheck(this, Post);
 
-    return _super.apply(this, arguments);
+    _this = _super.call(this, props);
+    _this.readPost = _this.readPost.bind(_assertThisInitialized(_this));
+    _this.showImages = _this.showImages.bind(_assertThisInitialized(_this));
+    _this.showIndicators = _this.showIndicators.bind(_assertThisInitialized(_this));
+    _this.state = {
+      post: {},
+      images: {},
+      index: 1,
+      category: {},
+      author: {}
+    };
+    return _this;
   }
 
   _createClass(Post, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.readPost();
+    }
+  }, {
+    key: "readPost",
+    value: function readPost() {
+      var _this2 = this;
+
+      axios.get("/api/posts/" + this.props.match.params.id).then(function (response) {
+        console.log(response);
+
+        _this2.setState({
+          post: response.data.post,
+          images: response.data.images,
+          category: response.data.category,
+          author: response.data.user,
+          isLoaded: true
+        });
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
+      if (this.state.isLoaded) return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+        className: "m-auto",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+          id: "carouselExampleIndicators",
+          className: "carousel slide w-50 m-5",
+          "data-bs-ride": "carousel",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+            className: "carousel-indicators",
+            id: "carouselIndicators",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("button", {
+              type: "button",
+              "data-bs-target": "#carouselExampleIndicators",
+              "data-bs-slide-to": "0",
+              className: "active",
+              "aria-current": "true",
+              "aria-label": "Slide 1"
+            }), this.showIndicators()]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+            className: "carousel-inner",
+            id: "carouselInner",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+              className: "carousel-item active",
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("img", {
+                src: this.state.post[0].mainImage,
+                className: "d-block w-100 h-100",
+                alt: "..."
+              })
+            }), this.showImages()]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("button", {
+            className: "carousel-control-prev",
+            type: "button",
+            "data-bs-target": "#carouselExampleIndicators",
+            "data-bs-slide": "prev",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
+              className: "carousel-control-prev-icon",
+              "aria-hidden": "true"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
+              className: "visually-hidden",
+              children: "Previous"
+            })]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("button", {
+            className: "carousel-control-next",
+            type: "button",
+            "data-bs-target": "#carouselExampleIndicators",
+            "data-bs-slide": "next",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
+              className: "carousel-control-next-icon",
+              "aria-hidden": "true"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
+              className: "visually-hidden",
+              children: "Next"
+            })]
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+          className: "post-user-info ",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("img", {
+            src: this.state.author[0].avatar
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
+            children: this.state.author[0].name
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+          className: "post-info m-5",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("span", {
+            children: ["\u0420\u0443\u0431\u0440\u0438\u043A\u0430: ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("b", {
+              children: this.state.category[0].name
+            })]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("span", {
+            children: ["\u041C\u0435\u0441\u0442\u043E\u043F\u043E\u043B\u043E\u0436\u0435\u043D\u0438\u0435: ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("b", {
+              children: this.state.author[0].location
+            })]
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("hr", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("p", {
+          className: "m-5",
+          children: this.state.post[0].body
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("hr", {})]
+      });
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
-        children: "Post"
+        className: "Loading",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+          className: "spinner-grow",
+          role: "status",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
+            className: "visually-hidden"
+          })
+        })
+      });
+    }
+  }, {
+    key: "showImages",
+    value: function showImages() {
+      return this.state.images.map(function (item) {
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+          className: "carousel-item",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("img", {
+            src: item.name,
+            className: "d-block w-100",
+            alt: "..."
+          })
+        });
+      });
+    }
+  }, {
+    key: "showIndicators",
+    value: function showIndicators() {
+      return this.state.images.map(function (item, index) {
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("button", {
+          type: "button",
+          "data-bs-target": "#carouselExampleIndicators",
+          "data-bs-slide-to": index + 1,
+          className: "",
+          "aria-current": "true",
+          "aria-label": "Slide " + (index + 1)
+        });
       });
     }
   }]);
@@ -4092,7 +4239,7 @@ var AddPost = /*#__PURE__*/function (_Component) {
         this.setState({});
       } else {
         this.state[e.target.name] = e.target.value;
-        this.state.errors[e.target.name] = "Введите правильную цену, например: 23 или123.33";
+        this.state.errors[e.target.name] = "Введите правильную цену, например: 23 или 123.33";
         this.setState({});
       }
     }
@@ -4450,7 +4597,6 @@ var PostItem = /*#__PURE__*/function (_Component) {
     _this = _super.call(this, props);
     _this.renderStatus = _this.renderStatus.bind(_assertThisInitialized(_this));
     _this.redirectToPost = _this.redirectToPost.bind(_assertThisInitialized(_this));
-    console.log(_util_util__WEBPACK_IMPORTED_MODULE_1__.default.parseDate(_this.props.post.created_at));
     return _this;
   }
 
@@ -4465,7 +4611,7 @@ var PostItem = /*#__PURE__*/function (_Component) {
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("li", {
         className: "list-group-item",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("img", {
-          src: this.props.post.image,
+          src: this.props.post.mainImage,
           className: "main-photo",
           onClick: this.redirectToPost
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {

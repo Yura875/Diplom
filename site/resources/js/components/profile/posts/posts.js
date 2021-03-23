@@ -50,6 +50,7 @@ export default class Posts extends Component {
         axios.get("/api/posts/byUser/" + this.props.user.id).then(response => {
             console.log(response);
             this.setState({posts: response.data, isLoadedPosts: true});
+
         });
     }
 

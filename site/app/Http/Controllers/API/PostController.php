@@ -4,10 +4,13 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 
+use App\Models\Entity;
 use App\Models\Image;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use TCG\Voyager\Models\Category;
 use TCG\Voyager\Models\Post;
 
 class PostController extends Controller
@@ -30,14 +33,14 @@ class PostController extends Controller
     public function store(Request $request)
     {
 
-        $post = new Post();
+        $post = new Entity();
         $post->title = $request->title;
         $post->body = $request->body;
         $post->author_id = $request->author_id;
         $post->category_id = $request->category_id;
         $post->slug = Str::slug($request->title);
         $post->price = $request->price;
-        $post->image = ((!empty($request->images[0])) ? $request->images[0] : "/storage/Images/Posts/default.png");
+        $post->mainImage = ((!empty($request->images[0])) ? $request->images[0] : "/storage/Images/Posts/default.png");
         $post->save();
 
         for ($i = 1; $i < count($request->images); $i++) {
@@ -52,7 +55,7 @@ class PostController extends Controller
 
     public function byUser($id)
     {
-        return Post::where('author_id',$id)->orderBy('created_at','desc')->get();
+        return Entity::where('author_id',$id)->orderBy('created_at','desc')->get();
 
     }
 
@@ -64,7 +67,12 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        //
+
+        $entity= Entity::where('id',$id)->get();
+        $images=Image::where('post_id',$id)->get();
+        $category= Category::where('id',$entity[0]->category_id)->get();
+        $user=User::where('id',$entity[0]->author_id)->get();
+        return response(["post"=>$entity,'images'=>$images,'category'=>$category,'user'=>$user]);
     }
 
     /**

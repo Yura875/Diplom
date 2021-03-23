@@ -41,6 +41,7 @@ Route::get('/category/{id}',[\App\Http\Controllers\API\CategoryController::class
 // Posts
 Route::resource('/posts',\App\Http\Controllers\API\PostController::class);
 Route::get('/posts/byUser/{id}',[\App\Http\Controllers\API\PostController::class,'byUser']);
+Route::get('/posts/{id}',[\App\Http\Controllers\API\PostController::class,'show']);
 
 // City
 Route::resource("/citys",\App\Http\Controllers\API\CitysController::class);

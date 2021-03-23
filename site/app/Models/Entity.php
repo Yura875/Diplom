@@ -5,12 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Image extends Model
+class Entity extends Model
 {
     use HasFactory;
-
-    public function posts()
-    {
-        return $this->belongsTo(Entity::class);
+    protected $table='entitys';
+    public function image(){
+        return $this->hasMany(Image::class,'post_id');
     }
 }

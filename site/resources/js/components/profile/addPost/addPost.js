@@ -298,7 +298,7 @@ export default class AddPost extends Component {
             this.setState({});
         } else {
             this.state[e.target.name] = e.target.value;
-            this.state.errors[e.target.name] = "Введите правильную цену, например: 23 или123.33";
+            this.state.errors[e.target.name] = "Введите правильную цену, например: 23 или 123.33";
             this.setState({});
         }
     }
@@ -381,6 +381,7 @@ export default class AddPost extends Component {
         }).catch(error => {
             console.log(error);
         });
+
     }
 
     updateUser() {

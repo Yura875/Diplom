@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-
 import Util from "../../util/util";
 
 
@@ -11,14 +10,15 @@ export default class PostItem extends Component {
         this.renderStatus = this.renderStatus.bind(this);
         this.redirectToPost = this.redirectToPost.bind(this);
 
-        console.log(Util.parseDate(this.props.post.created_at));
     }
-    redirectToPost(){
-        window.location="/post/"+this.props.post.slug+"/"+this.props.post.id;
+
+    redirectToPost() {
+        window.location = "/post/" + this.props.post.slug + "/" + this.props.post.id;
     }
+
     render() {
         return (<li key={this.props.post.id} className="list-group-item">
-            <img src={this.props.post.image} className="main-photo" onClick={this.redirectToPost}/>
+            <img src={this.props.post.mainImage} className="main-photo" onClick={this.redirectToPost}/>
 
             <div className="wrapper">
                 <h3>{this.props.post.price}грн</h3>
