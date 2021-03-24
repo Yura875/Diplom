@@ -3324,29 +3324,127 @@ var Welcome = /*#__PURE__*/function (_Component) {
   var _super = _createSuper(Welcome);
 
   function Welcome(props) {
+    var _this;
+
     _classCallCheck(this, Welcome);
 
-    return _super.call(this, props);
+    _this = _super.call(this, props);
+    _this.state = {
+      cities: {},
+      isLoadedCities: false
+    };
+    _this.renderCitys = _this.renderCitys.bind(_assertThisInitialized(_this));
+    _this.loadCities = _this.loadCities.bind(_assertThisInitialized(_this));
+    _this.selectLocation = _this.selectLocation.bind(_assertThisInitialized(_this));
+    return _this;
   }
 
   _createClass(Welcome, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.loadCities();
+    }
+  }, {
     key: "render",
     value: function render() {
-      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
         className: "welcome-page",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
-            type: "text",
-            name: "search"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
-            type: "text",
-            name: "city"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+          className: "modal fade",
+          id: "LocationModal",
+          tabIndex: "-1",
+          "aria-labelledby": "LocationModalLabel",
+          "aria-hidden": "true",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+            className: "modal-dialog modal-dialog-centered modal-dialog-scrollable",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+              className: "modal-content",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+                className: "modal-header",
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h5", {
+                  className: "modal-title",
+                  id: "exampleModalLabel",
+                  children: "\u041C\u0435\u0441\u0442\u043E\u043F\u043E\u043B\u043E\u0436\u0435\u043D\u0438\u0435"
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+                  type: "button",
+                  className: "btn-close",
+                  "data-bs-dismiss": "modal",
+                  "aria-label": "Close"
+                })]
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+                className: "modal-body",
+                id: "LocationModalBody",
+                children: this.state.isLoadedCities ? this.renderCitys() : ''
+              })]
+            })
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          className: "Search m-5",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+            className: "search-field",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+              type: "search",
+              name: "search",
+              className: "field-set-box-title-input",
+              placeholder: ""
+            })
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("a", {
+            href: "#",
+            className: "Category",
+            "data-bs-toggle": "modal",
+            name: "location",
+            id: "location",
+            "data-bs-target": "#LocationModal",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("img", {
+              src: "/Images/welcome/location.png"
+            }), "\u0412\u0441\u044F \u0423\u043A\u0440\u0430\u0438\u043D\u0430"]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("button", {
             type: "button",
-            value: "\u041F\u043E\u0438\u0441\u043A"
+            className: "search-button",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
+              children: "\u2315"
+            }), "\u041F\u043E\u0438\u0441\u043A"]
           })]
+        })]
+      });
+    }
+  }, {
+    key: "loadCities",
+    value: function loadCities() {
+      var _this2 = this;
+
+      axios.get('/api/citys').then(function (response) {
+        _this2.setState({
+          isLoadedCities: true,
+          cities: response.data
+        });
+      });
+    }
+  }, {
+    key: "renderCitys",
+    value: function renderCitys() {
+      var _this3 = this;
+
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("ul", {
+        className: "list-group list-group-flush",
+        children: this.state.cities.map(function (item) {
+          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("li", {
+            onClick: _this3.selectLocation,
+            id: item.id,
+            className: "list-group-item text-center",
+            children: item.name
+          }, item.id.toString());
         })
       });
+    }
+  }, {
+    key: "selectLocation",
+    value: function selectLocation(e) {
+      this.state.location = e.target.innerText;
+      document.getElementById('location').innerHTML = '<img src="/Images/welcome/location.png"/>' + e.target.innerText;
+      var myModalEl = document.getElementById('LocationModal');
+      var modal = bootstrap.Modal.getInstance(myModalEl);
+      modal.hide();
     }
   }]);
 
@@ -3573,6 +3671,7 @@ var Post = /*#__PURE__*/function (_Component) {
     _this.readPost = _this.readPost.bind(_assertThisInitialized(_this));
     _this.showImages = _this.showImages.bind(_assertThisInitialized(_this));
     _this.showIndicators = _this.showIndicators.bind(_assertThisInitialized(_this));
+    _this.showTel = _this.showTel.bind(_assertThisInitialized(_this));
     _this.state = {
       post: {},
       images: {},
@@ -3608,82 +3707,113 @@ var Post = /*#__PURE__*/function (_Component) {
   }, {
     key: "render",
     value: function render() {
-      if (this.state.isLoaded) return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
-        className: "m-auto",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
-          id: "carouselExampleIndicators",
-          className: "carousel slide w-50 m-5",
-          "data-bs-ride": "carousel",
+      if (this.state.isLoaded) if (this.state.post != "") {
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+          className: "m-auto post-page",
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
-            className: "carousel-indicators",
-            id: "carouselIndicators",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("button", {
+            id: "carouselExampleIndicators",
+            className: "carousel slide w-75 m-auto mt-lg-5",
+            "data-bs-ride": "carousel",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+              className: "carousel-indicators",
+              id: "carouselIndicators",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("button", {
+                type: "button",
+                "data-bs-target": "#carouselExampleIndicators",
+                "data-bs-slide-to": "0",
+                className: "active",
+                "aria-current": "true",
+                "aria-label": "Slide 1"
+              }), this.showIndicators()]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+              className: "carousel-inner",
+              id: "carouselInner",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+                className: "carousel-item active",
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("img", {
+                  src: this.state.post[0].mainImage,
+                  className: "d-block w-100",
+                  alt: "..."
+                })
+              }), this.showImages()]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("button", {
+              className: "carousel-control-prev",
               type: "button",
               "data-bs-target": "#carouselExampleIndicators",
-              "data-bs-slide-to": "0",
-              className: "active",
-              "aria-current": "true",
-              "aria-label": "Slide 1"
-            }), this.showIndicators()]
+              "data-bs-slide": "prev",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
+                className: "carousel-control-prev-icon",
+                "aria-hidden": "true"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
+                className: "visually-hidden",
+                children: "Previous"
+              })]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("button", {
+              className: "carousel-control-next",
+              type: "button",
+              "data-bs-target": "#carouselExampleIndicators",
+              "data-bs-slide": "next",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
+                className: "carousel-control-next-icon",
+                "aria-hidden": "true"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
+                className: "visually-hidden",
+                children: "Next"
+              })]
+            })]
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
-            className: "carousel-inner",
-            id: "carouselInner",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
-              className: "carousel-item active",
-              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("img", {
-                src: this.state.post[0].mainImage,
-                className: "d-block w-100 h-100",
-                alt: "..."
-              })
-            }), this.showImages()]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("button", {
-            className: "carousel-control-prev",
-            type: "button",
-            "data-bs-target": "#carouselExampleIndicators",
-            "data-bs-slide": "prev",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
-              className: "carousel-control-prev-icon",
-              "aria-hidden": "true"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
-              className: "visually-hidden",
-              children: "Previous"
+            className: "post-info m-5",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("span", {
+              children: ["\u0420\u0443\u0431\u0440\u0438\u043A\u0430: ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("b", {
+                children: this.state.category[0].name
+              })]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("span", {
+              children: ["\u041C\u0435\u0441\u0442\u043E\u043F\u043E\u043B\u043E\u0436\u0435\u043D\u0438\u0435: ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("b", {
+                children: this.state.author[0].location
+              })]
             })]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("button", {
-            className: "carousel-control-next",
-            type: "button",
-            "data-bs-target": "#carouselExampleIndicators",
-            "data-bs-slide": "next",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
-              className: "carousel-control-next-icon",
-              "aria-hidden": "true"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
-              className: "visually-hidden",
-              children: "Next"
-            })]
-          })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
-          className: "post-user-info ",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("img", {
-            src: this.state.author[0].avatar
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
-            children: this.state.author[0].name
-          })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
-          className: "post-info m-5",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("span", {
-            children: ["\u0420\u0443\u0431\u0440\u0438\u043A\u0430: ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("b", {
-              children: this.state.category[0].name
-            })]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("span", {
-            children: ["\u041C\u0435\u0441\u0442\u043E\u043F\u043E\u043B\u043E\u0436\u0435\u043D\u0438\u0435: ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("b", {
-              children: this.state.author[0].location
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("hr", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("h5", {
+            className: "m-5",
+            children: "\u041E\u043F\u0438\u0441\u0430\u043D\u0438\u0435"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("p", {
+            className: "m-5",
+            children: this.state.post[0].body
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("hr", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+            className: "post-user-info m-5",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("h4", {
+              children: "\u041F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u0435\u043B\u044C"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+              className: "m-5",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("img", {
+                src: this.state.author[0].avatar
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
+                children: this.state.author[0].name
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("input", {
+                type: "button",
+                name: "tel",
+                onClick: this.showTel,
+                className: "tel-button float-right",
+                value: "\u041F\u043E\u043A\u0430\u0437\u0430\u0442\u044C \u0442\u0435\u043B\u0435\u0444\u043E\u043D"
+              })]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
+                children: "\u041D\u0430\u043F\u0438\u0441\u0430\u0442\u044C \u0441\u043E\u043E\u0431\u0449\u0435\u043D\u0438\u0435"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("textarea", {
+                className: "message"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("input", {
+                type: "button",
+                value: "\u041E\u0442\u043F\u0440\u0430\u0432\u0438\u0442\u044C",
+                className: "msg-button"
+              })]
             })]
           })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("hr", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("p", {
-          className: "m-5",
-          children: this.state.post[0].body
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("hr", {})]
-      });
+        });
+      } else {
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+          className: "no-found-post",
+          children: "\u0414\u0430\u043D\u043D\u043E\u0435 \u043E\u0431\u044A\u044F\u0432\u043B\u0435\u043D\u0438\u0435 \u043D\u0435 \u043D\u0430\u0439\u0434\u0435\u043D\u043E"
+        });
+      }
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
         className: "Loading",
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
@@ -3694,6 +3824,11 @@ var Post = /*#__PURE__*/function (_Component) {
           })
         })
       });
+    }
+  }, {
+    key: "showTel",
+    value: function showTel(e) {
+      e.target.value = this.state.author[0].tel;
     }
   }, {
     key: "showImages",

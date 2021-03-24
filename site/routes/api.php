@@ -19,9 +19,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 // Users
-Route::resource("/user",\App\Http\Controllers\API\UserController::class);
-Route::get("/user/{id}",[\App\Http\Controllers\API\UserController::class,'show']);
-Route::post("/user/login",[\App\Http\Controllers\API\UserController::class,'login']);
+Route::resource("/user", \App\Http\Controllers\API\UserController::class);
+Route::get("/user/{id}", [\App\Http\Controllers\API\UserController::class, 'show']);
+Route::post("/user/login", [\App\Http\Controllers\API\UserController::class, 'login']);
 
 // Email verification
 Route::get('/email/verify/{id}', 'App\Http\Controllers\API\VerificationController@verify')->name('verification.verify');
@@ -32,17 +32,17 @@ Route::post('/password/email', 'App\Http\Controllers\API\ForgotPasswordControlle
 Route::post('/password/reset', 'App\Http\Controllers\API\ForgotPasswordController@reset');
 
 // File operations
-Route::resource("/file",\App\Http\Controllers\API\FilesOperations::class);
+Route::resource("/file", \App\Http\Controllers\API\FilesOperations::class);
 
 // CategoryItem
-Route::resource('/category',\App\Http\Controllers\API\CategoryController::class);
-Route::get('/category/{id}',[\App\Http\Controllers\API\CategoryController::class,'show']);
+Route::resource('/category', \App\Http\Controllers\API\CategoryController::class);
+Route::get('/category/{id}', [\App\Http\Controllers\API\CategoryController::class, 'show']);
 
 // Posts
-Route::resource('/posts',\App\Http\Controllers\API\PostController::class);
-Route::get('/posts/byUser/{id}',[\App\Http\Controllers\API\PostController::class,'byUser']);
-Route::get('/posts/{id}',[\App\Http\Controllers\API\PostController::class,'show']);
+Route::resource('/posts', \App\Http\Controllers\API\PostController::class);
+Route::get('/posts/byUser/{id}', [\App\Http\Controllers\API\PostController::class, 'byUser']);
+Route::get('/posts/{id}', [\App\Http\Controllers\API\PostController::class, 'show']);
 
 // City
-Route::resource("/citys",\App\Http\Controllers\API\CitysController::class);
+Route::resource("/citys", \App\Http\Controllers\API\CitysController::class);
 

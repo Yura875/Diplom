@@ -55,7 +55,7 @@ class PostController extends Controller
 
     public function byUser($id)
     {
-        return Entity::where('author_id',$id)->orderBy('created_at','desc')->get();
+        return Entity::where('author_id', $id)->orderBy('created_at', 'desc')->get();
 
     }
 
@@ -68,11 +68,15 @@ class PostController extends Controller
     public function show($id)
     {
 
-        $entity= Entity::where('id',$id)->get();
-        $images=Image::where('post_id',$id)->get();
-        $category= Category::where('id',$entity[0]->category_id)->get();
-        $user=User::where('id',$entity[0]->author_id)->get();
-        return response(["post"=>$entity,'images'=>$images,'category'=>$category,'user'=>$user]);
+        $entity = Entity::where('id', $id)->where('status', 'PUBLISHED')->get();
+        if (empty($entity[0]))
+            return response(['post' => '']);
+        $images = Image::where('post_id', $id)->get();
+        $category = Category::where('id', $entity[0]->category_id)->get();
+        $entity[0]->visited += 1;
+        $entity[0]->save();
+        $user = User::where('id', $entity[0]->author_id)->get();
+        return response(["post" => $entity, 'images' => $images, 'category' => $category, 'user' => $user]);
     }
 
     /**
