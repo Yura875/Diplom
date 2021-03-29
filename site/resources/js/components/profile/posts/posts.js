@@ -55,7 +55,7 @@ export default class Posts extends Component {
     }
 
     renderPosts() {
-        return (<ul className="list-group posts-list">
+        return (<ul className="list-group posts-list m-5">
             {this.state.posts.map(item => (
                 <PostItem post={item}/>
             ))}

@@ -12,6 +12,7 @@ import Footer from "./layouts/Footer";
 import AddPost from "./profile/addPost/addPost";
 import FileOperation from "./tmp/fileOperation";
 import Post from "./posts/post";
+import Search from "../search/search";
 
 function Root() {
     return (
@@ -24,7 +25,7 @@ function Root() {
                 <Route path="account/:page" component={accountIndex}/>
 
                 <Route path="/myaccount" component={Profile}/>
-
+                <Route path="/search" component={Search}/>
                 <Route path="/addPost" component={AddPost}/>
                 <Route path="/post/:slug/:id" component={Post}/>
 

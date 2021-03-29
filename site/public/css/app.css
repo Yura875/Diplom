@@ -10004,6 +10004,9 @@ h3 {
     border-color: #dee2e6;
   }
 }
+img{
+    cursor: pointer;
+}
 hr {
 
 
@@ -10016,6 +10019,7 @@ hr:not([size]) {
 
 .header {
     background: #002f34;
+
     width: 100%;
     min-width: 610px;
     min-height: 72px;
@@ -10916,43 +10920,54 @@ hr:not([size]) {
     color: #002f34;
     background: #fff;
 }
-.welcome-page{
-    background: #fff;
+
+.welcome-page {
+
     width: 80%;
     margin: auto;
 }
-.Search a {
-    display: inline-block;
-    width: 20%;
-    vertical-align: middle;
 
+.Search {
+    background: #fff;
 }
 
-.Search a:before {
-    content: '';
+.Search a {
+    display: inline-block;
+    width: 30%;
+    border-radius: 0;
+    vertical-align: middle;
+    background: transparent;
+    padding: 0;
+    padding-top: 10px;
+    border-right: 1px solid lightgrey;
+
+
 }
 
 .Search img {
     width: 32px;
     height: 32px;
     margin-top: -5px;
-    margin-right:10px ;
+    margin-right: 10px;
 
 
 }
 
 .search-field {
     border: none;
-    width: 60%;
+    border-right: 1px solid lightgrey;
+
+    width: 55%;
     display: inline-block;
     position: relative;
-    background: #f2f4f5;
+    vertical-align: middle;
 }
 
 .search-field:before {
     font-size: 32px;
-
+    top: -5px;
     left: 20px;
+    margin-right: 5px;
     position: absolute;
     content: '\002315';
 }
@@ -10961,18 +10976,169 @@ hr:not([size]) {
     font-size: 16px;
     width: 90%;
     margin: auto;
-}
-.search-button{
-    border: none;
-    background: #f2f4f5;
-    font-size: 16px;
-    border-radius:4px ;
-    padding: 0 20px;
-    vertical-align: middle;
+    background: transparent;
+
 }
 
-.search-button span{
+.search-button {
+    border: none;
+    background: transparent;
+    font-size: 16px;
+    border-radius: 4px;
+    padding: 0 20px 10px 20px;
+    vertical-align: middle;
+    transition: .5s;
+
+}
+
+.search-button:hover {
+    color: #fff;
+    background: #002f34;
+}
+
+.search-button span {
     font-size: 32px;
     margin-right: 10px;
+}
+
+.main-category {
+    background-color: #fff;
+    padding: 20px;
+}
+
+.main-category li {
+    border: none;
+    display: grid;
+    text-align: center;
+    justify-items: center;
+
+}
+
+.main-category li:hover .main-category-text {
+    background: #002f34;
+    color: #fff;
+    border-radius: 4px;
+    transition: .5s;
+}
+
+.main-category img {
+    width: 70px;
+    height: 70px;
+}
+
+.main-category-image {
+    border-radius: 50%;
+    background: #2d995b;
+}
+
+.main-category-text {
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.welcome-post {
+    display: inline-block;
+    margin: 10px;
+
+    padding: 20px;
+    background: #fff;
+}
+
+.welcome-post span {
+    font-size: 16px;
+}
+
+.welcome-post h4 {
+    margin: 20px 0;
+    text-align: center;
+}
+
+.welcome-post h4:hover {
+    background: #002f34;
+    color: #fff;
+    border-radius: 4px;
+    transition: .5s;
+}
+
+.welcome-post img {
+    width: 268px;
+    height: 218px;
+    display: block;
+    margin: auto;
+}
+
+.favorite-button {
+    border: none;
+    background: transparent;
+    font-size: 32px;
+    vertical-align: middle;
+    margin-left: 160px;
+}
+
+.filters {
+    width: 90%;
+}
+
+.search-post {
+    width: 100%;
+    display: flex;
+    background: #fff;
+    margin: 10px;
+}
+
+.search-post img {
+    width: 216px;
+    height: 152px;
+    margin: 10px;
+}
+
+.search-price-favorite {
+    display: grid;
+    margin: 10px;
+    width: 10%;
+    height: 100%;
+}
+
+.search-title-location {
+    display: grid;
+    margin: 20px;
+    padding-right: 20px;
+}
+
+.search-favorite-button {
+    border: none;
+    background: transparent;
+    font-size: 32px;
+    vertical-align: middle;
+    text-align: right;
+    outline: none;
+}
+
+.search-price-favorite span {
+    text-align: right;
+}
+
+.search-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+.price{
+    display: inline-block;
+    color: #acacac;
+    font-size: 16px;
+    margin: 5px 15px;
+    text-align: center;
+}
+.price input[type=text]{
+    outline: none;
+    border: none;
+    width: 20%;
+    margin: 0 10px;
+    box-sizing: border-box;
+    padding: 14px 16px;
+    border-radius: 4px;
+    font-size: 14px;
+    background: #f2f4f5;
 }
 

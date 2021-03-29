@@ -4,8 +4,9 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 
+use App\Models\Category;
 use Illuminate\Http\Request;
-use TCG\Voyager\Models\Category;
+//use TCG\Voyager\Models\Category;
 
 
 class CategoryController extends Controller
@@ -17,7 +18,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-
+        return Category::with('category')->orderBy('category_id','asc')->get();
     }
 
     /**

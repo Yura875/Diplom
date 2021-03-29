@@ -9,7 +9,7 @@ export default class PostItem extends Component {
         super(props);
         this.renderStatus = this.renderStatus.bind(this);
         this.redirectToPost = this.redirectToPost.bind(this);
-
+        console.log(Util.parseDate(this.props.post.created_at))
     }
 
     redirectToPost() {
@@ -17,7 +17,7 @@ export default class PostItem extends Component {
     }
 
     render() {
-        return (<li key={this.props.post.id} className="list-group-item">
+        return (<li key={this.props.post.id.toString()} className="list-group-item m-3">
             <img src={this.props.post.mainImage} className="main-photo" onClick={this.redirectToPost}/>
 
             <div className="wrapper">

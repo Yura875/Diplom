@@ -40,6 +40,7 @@ Route::get('/category/{id}', [\App\Http\Controllers\API\CategoryController::clas
 
 // Posts
 Route::resource('/posts', \App\Http\Controllers\API\PostController::class);
+Route::post('/posts/byParameters', [\App\Http\Controllers\API\PostController::class, 'byParameters']);
 Route::get('/posts/byUser/{id}', [\App\Http\Controllers\API\PostController::class, 'byUser']);
 Route::get('/posts/{id}', [\App\Http\Controllers\API\PostController::class, 'show']);
 

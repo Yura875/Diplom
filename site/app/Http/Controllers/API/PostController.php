@@ -22,6 +22,7 @@ class PostController extends Controller
      */
     public function index()
     {
+        return Entity::where('status', 'PUBLISHED')->inRandomOrder()->limit(10)->with('city')->get();
     }
 
     /**
@@ -53,6 +54,82 @@ class PostController extends Controller
         return response(["status" => 1, "post" => $post]);
     }
 
+    public function byParameters(Request $request)
+    {
+
+        $searchData = array();
+        $searchData = [
+            'status' => 'PUBLISHED'
+        ];
+        if (!empty($request->search)) {
+            //      array_push($searchData, ['title', 'LIKE', '%' . $request->search . '%']);
+            $searchData += [['title', 'LIKE', '%' . $request->search . '%']];
+        }
+        if ($request->city_id != 0) {
+            $searchData += ['city_id' => $request->city_id];
+        }
+        if ($request->category_id != 0) {
+            $searchData += ['category_id' => $request->category_id];
+        }
+        if (!empty($request->minPrice)) {
+            $searchData += [['price','>',$request->minPrice]];
+        }
+        if (!empty($request->maxPrice)) {
+            $searchData += [['price','<',$request->maxPrice]];
+        }
+         // return $searchData;
+
+        return response(['entity' => Entity::where($searchData)->with('city')->get(), 'status' => 6]);
+        /* if (!empty($request->search)) {
+             if ($request->city_id != 0) {
+                 if ($request->category_id != 0) {
+                     return response(['entity' => Entity::where([
+                         'status' => 'PUBLISHED',
+                         'city_id' => $request->city_id,
+                         ['title', 'LIKE', '%' . 'Заг' . '%'],
+                         'category_id' => $request->category_id])->with('city')->get(), 'status' => 1]);
+
+                 } else {
+                     return response(['entity' => Entity::where([
+                         'status' => 'PUBLISHED',
+                         'city_id' => $request->city_id,
+                         ['title', 'LIKE', '%' . 'Заг' . '%'],
+                     ])->with('city')->get(), 'status' => 2]);
+                 }
+             }
+             if ($request->category_id != 0) {
+                 return response(['entity' => Entity::where([
+                     'status' => 'PUBLISHED',
+                     'category_id' => $request->category_id,
+                     ['title','LIKE','%'.'Заг'.'%']
+                 ])->with('city')->get(), 'status' => 7]);
+             }
+             return response(['entity' => Entity::where([
+                 ['title','LIKE','%'.'Заг'.'%']
+             ])->with('city')->get(), 'status' => 8]);
+         }
+
+         if ($request->city_id != 0) {
+             if ($request->category_id != 0) {
+                 return response(['entity' => Entity::where([
+                     'status' => 'PUBLISHED',
+                     'city_id' => $request->city_id,
+                     'category_id' => $request->category_id])->with('city')->get(), 'status' => 3]);
+             } else {
+                 return response(['entity' => Entity::where([
+                     'status' => 'PUBLISHED',
+                     'city_id' => $request->city_id,
+                 ])->with('city')->get(), 'status' => 4]);
+             }
+         }
+         if ($request->category_id != 0) {
+             return response(['entity' => Entity::where([
+                 'status' => 'PUBLISHED',
+                 'category_id' => $request->category_id])->with('city')->get(), 'status' => 5]);
+         }
+         return response(['entity' => Entity::where('status', 'PUBLISHED')->with('city')->get(), 'status' => 6]);*/
+    }
+
     public function byUser($id)
     {
         return Entity::where('author_id', $id)->orderBy('created_at', 'desc')->get();
@@ -67,7 +144,6 @@ class PostController extends Controller
      */
     public function show($id)
     {
-
         $entity = Entity::where('id', $id)->where('status', 'PUBLISHED')->get();
         if (empty($entity[0]))
             return response(['post' => '']);

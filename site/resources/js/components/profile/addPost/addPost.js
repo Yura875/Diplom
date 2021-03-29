@@ -361,7 +361,7 @@ export default class AddPost extends Component {
             category_id: this.state.categoryId,
             author_id: this.state.user.id,
             body: this.state.description,
-            price: this.state.price,
+            price: parseFloat(this.state.price),
             images: this.state.files
 
         });
@@ -381,7 +381,6 @@ export default class AddPost extends Component {
         }).catch(error => {
             console.log(error);
         });
-
     }
 
     updateUser() {
@@ -421,7 +420,7 @@ export default class AddPost extends Component {
                 this.loadCitys();
             }
 
-        }).catch(error=>{
+        }).catch(error => {
             Util.incorrect_user();
         });
     }
