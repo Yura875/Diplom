@@ -17,9 +17,9 @@
 
 
 </head>
-<body>
+<body class="bg-dark">
 
-<div id="app">
+<div id="app" >
 
 </div>
 

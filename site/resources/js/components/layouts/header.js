@@ -57,7 +57,7 @@ export default class Header extends Component {
 */
     render() {
         return (
-            <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+            <nav className="navbar navbar-expand-lg navbar-light bg-light">
                 <div className="modal fade" id="FavoriteModal" tabIndex="-1" aria-labelledby="FavoriteModalLabel"
                      aria-hidden="true">
                     <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
@@ -88,15 +88,16 @@ export default class Header extends Component {
                             <li className="nav-item profile">
                                 <a className="nav-link" href="/myaccount"><i className="fa fa-user"></i><span>Мой профиль</span></a>
                             </li>
-                            <li className="nav-item">
-                                <a id="new-ad-link"  className="nav-link" href="/addPost">Подать объявление</a>
-                            </li>
+
                         </ul>
-                        <div className="d-flex">
-                            <a href="#" id="favorite" className="nav-link favorites" data-bs-toggle="modal" name="category"
-                               data-bs-target="#FavoriteModal"><span><i className="fa fa-heart"></i></span></a>
+                        <div className="d-flex mr-5">
+                            <a href="#" id="favorite" className="nav-link favorites" data-bs-toggle="modal" name="favorite"
+                                data-bs-target="#FavoriteModal"><span><i className="fa fa-heart"></i></span></a>
                             <input className="form-control me-2" type="search" placeholder="Поиск" aria-label="Search"/>
-                                <button className="btn btn-outline-success" type="submit">Поиск</button>
+                            <button className="btn btn-outline-success" type="submit">Поиск</button>
+                        </div>
+                        <div className="d-flex ml-5">
+                            <a id="new-ad-link"  className="nav-link" href="/addPost">Подать объявление</a>
                         </div>
                     </div>
                 </div>

@@ -80,8 +80,9 @@ export default class Post extends Component {
                         <h4>Пользователь</h4>
                         <div className="m-5"><img src={this.state.author[0].avatar}/>
                             <span>{this.state.author[0].name}</span>
-                            <input type="button" name="tel" onClick={this.showTel} className="tel-button float-right"
-                                   value="Показать телефон"/>
+                            {(this.state.author[0].tel != null) ? <input type="button" name="tel" onClick={this.showTel}
+                                                                         className="tel-button float-right"
+                                                                         value="Показать телефон"/> : ''}
                         </div>
                         <div>
                             <span>Написать сообщение</span>

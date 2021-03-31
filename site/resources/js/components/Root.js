@@ -12,13 +12,14 @@ import Footer from "./layouts/Footer";
 import AddPost from "./profile/addPost/addPost";
 import FileOperation from "./tmp/fileOperation";
 import Post from "./posts/post";
-import Search from "../search/search";
+import Search from "./search/search";
 import Edit from "./posts/edit";
 
 function Root() {
     return (
         <Router>
             <Header/>
+            <div className="">
             <Switch>
                 <Route exact path="/" component={Welcome}/>
 
@@ -32,9 +33,10 @@ function Root() {
                 <Route path="/edit/:slug/:id" component={Edit}/>
 
 
-                <Route path="/tmp/fileOperation" component={FileOperation}/>
+
                 <Route component={Error404}/>
             </Switch>
+            </div>
             <Footer/>
         </Router>
     );

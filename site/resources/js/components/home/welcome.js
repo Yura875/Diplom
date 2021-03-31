@@ -82,8 +82,8 @@ export default class Welcome extends Component {
                             {(this.state.errors.search != null) ? this.state.errors.search : ''}
                         </div>
                     </div>
-                    <a href="#" className="Category" data-bs-toggle="modal" name="location" id="location"
-                       data-bs-target="#LocationModal"><img src="/Images/welcome/location.png"/>Вся Украина</a>
+                    <a href="#" className="Category pl-3" data-bs-toggle="modal" name="location" id="location"
+                       data-bs-target="#LocationModal">Вся Украина</a>
 
                     <button type="button" className="search-button" onClick={this.send}><span>&#8981;</span>Поиск</button>
 
@@ -180,7 +180,7 @@ export default class Welcome extends Component {
         document
             .getElementById(
                 'location'
-            ).innerHTML = '<img src="/Images/welcome/location.png"/>' + e.target.innerText;
+            ).innerHTML = e.target.innerText;
         let
             myModalEl = document.getElementById('LocationModal');
         let

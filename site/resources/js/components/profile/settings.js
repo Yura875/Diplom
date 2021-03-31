@@ -5,7 +5,9 @@ export default class Settings extends Component {
         super(props);
         this.state = {
             obj: {},
-            user: this.props.user
+            user: this.props.user,
+            cities: [],
+            isLoadedCities: false,
         };
         this.csrf = document.querySelector('meta[name="csrf-token"]').content;
         this.onChange = this.onChange.bind(this);
@@ -14,7 +16,9 @@ export default class Settings extends Component {
         this.saveData = this.saveData.bind(this);
         this.savePassData = this.savePassData.bind(this);
         this.delUser = this.delUser.bind(this);
-
+        this.renderCitys = this.renderCitys.bind(this);
+        this.loadCities = this.loadCities.bind(this);
+        this.selectLocation = this.selectLocation.bind(this);
     }
 
     onChange(e) {
@@ -30,7 +34,14 @@ export default class Settings extends Component {
 
         this.saveData(this.state.obj);
     }
+    selectLocation(e) {
+        this.state.location = e.target.id;
+        document.getElementById('location').innerHTML = e.target.innerText;
+        let myModalEl = document.getElementById('LocationModal');
+        let modal = bootstrap.Modal.getInstance(myModalEl);
+        modal.hide();
 
+    }
     saveTelData() {
         this.state.obj = {
             _token: this.csrf,
@@ -77,6 +88,25 @@ export default class Settings extends Component {
 
     render() {
         return (<div className="settings-box">
+            <div className="modal fade" id="LocationModal" tabIndex="-1" aria-labelledby="LocationModalLabel"
+                 aria-hidden="true">
+                <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                    <div className="modal-content">
+                        <div className="modal-header">
+                            <h5 className="modal-title" id="exampleModalLabel">Местоположение</h5>
+                            <input type="button" className="btn-close" data-bs-dismiss="modal"
+                                   aria-label="Close"/>
+                        </div>
+
+                        <div className="modal-body" id="LocationModalBody">
+                            <ul className="list-group list-group-flush">
+                                {(this.state.isLoadedCities) ? this.renderCitys() : ''}
+                            </ul>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div id="msg"></div>
             <div className="accordion" id="accordionExample">
                 <div className="accordion-item">
@@ -91,13 +121,15 @@ export default class Settings extends Component {
                         <div className="accordion-body">
                             <div className="auth-block update-user">
                                 <label>Выбрать город</label>
-                                <input type="text" name="location" onChange={this.onChange}/>
+                                <a href="#" className="Category pl-3" data-bs-toggle="modal" name="location"
+                                   id="location"
+                                   data-bs-target="#LocationModal"></a>
                             </div>
                             <hr/>
 
                             <div className="auth-block update-user">
                                 <label>Контактное лицо</label>
-                                <input type="text" name="name" onChange={this.onChange}/>
+                                <input type="text" name="name" onChange={this.onChange} defaultValue={this.state.user.name}/>
                             </div>
                             <div className="auth-block update-user">
                                 <input type="button" value="Сохранить" className="new-posts-profile"
@@ -116,9 +148,9 @@ export default class Settings extends Component {
                     <div id="collapseTwo" className="accordion-collapse collapse" aria-labelledby="headingTwo"
                          data-bs-parent="#accordionExample">
                         <div className="accordion-body">
-                            <div className="auth-block update-user">
+                            <div className="auth-block update-user w-50">
                                 <label>Новый номер телефона</label>
-                                <input type="tel" name="tel" onChange={this.onChange}/>
+                                <input type="tel" name="tel" onChange={this.onChange} defaultValue={this.state.user.tel}/>
                             </div>
                             <div className="auth-block update-user">
                                 <input type="button" value="Сохранить" className="new-posts-profile"
@@ -154,35 +186,41 @@ export default class Settings extends Component {
                         </div>
                     </div>
                 </div>
-                <div className="accordion-item">
-                    <h2 className="accordion-header" id="headingFour">
-                        <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                            Удалить учетную запись
-                        </button>
-                    </h2>
-                    <div id="collapseFour" className="accordion-collapse collapse" aria-labelledby="headingFour"
-                         data-bs-parent="#accordionExample">
-                        <div className="accordion-body">
-                            <div className="auth-block delete-user">
-                                <input type="button" value="Удалить учетную запись" className="new-posts-profile"
-                                       onClick={this.delUser}/>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>);
+    }
+
+    componentDidMount() {
+        this.loadCities();
     }
 
     delUser() {
         fetch("/api/user/" + this.state.user.id, {
             method: "DELETE",
         }).then(r => r.json()).then(res => {
-                if (res.status == 1) {
-                    Util.deleteCookie("user");
-                    window.location="/";
-                }
+            if (res.status == 1) {
+                Util.deleteCookie("user");
+                window.location = "/";
+            }
+        });
+    }
+
+    renderCitys() {
+        return this.state.cities.map(item => (
+            <li onClick={this.selectLocation} id={item.id}
+                className="list-group-item text-center"
+                key={item.id.toString()}>{item.name}</li>
+        ));
+    }
+
+    loadCities() {
+        axios.get('/api/citys').then(response => {
+            this.setState({
+                isLoadedCities: true,
+                cities: response.data
             });
+
+
+        });
     }
 }

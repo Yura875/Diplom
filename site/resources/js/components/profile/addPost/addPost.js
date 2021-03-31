@@ -103,7 +103,7 @@ export default class AddPost extends Component {
                         </div>
                     </div>
                 </div>
-                <h1>Подать объявление на OLX</h1>
+                <h1>Подать объявление</h1>
                 <div className="field-set-box">
 
                     <div className="field-set-box-title">Заголовок</div>

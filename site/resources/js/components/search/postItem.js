@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import Util from "../components/util/util";
+import Util from "../util/util";
 
 export default class PostItem extends Component {
     constructor(props) {

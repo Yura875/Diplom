@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import Util from "../components/util/util";
+import Util from "../util/util";
 import PostItem from "./postItem";
 
 
@@ -101,10 +101,10 @@ export default class Search extends Component {
                 </div>
             </div>
             <div className="Search m-5">
-                <a href="#" className="Category" data-bs-toggle="modal" name="location" id="location"
-                   data-bs-target="#LocationModal"><img src="/Images/welcome/location.png"/>Вся Украина</a>
+                <a href="#" className="Category pl-3" data-bs-toggle="modal" name="location" id="location"
+                   data-bs-target="#LocationModal"><span>Вся Украина</span></a>
 
-                <a href="#" id="category" className="Category" data-bs-toggle="modal" name="category"
+                <a href="#" id="category" className="Category pl-3" data-bs-toggle="modal" name="category"
                    data-bs-target="#CategoryModal">Все рубрики</a>
                 <div className="price">
                     <span>Цена от</span>

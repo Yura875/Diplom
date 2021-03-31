@@ -69,16 +69,22 @@ export default class Profile extends Component {
                                         </button>
                                         <ul className="dropdown-menu">
                                             <li><a className="dropdown-item disabled" href="#">Мой профиль:</a></li>
-                                            <li><a className="dropdown-item" href="#">Объвления</a></li>
-                                            <li><a className="dropdown-item" href="#">Сообщения</a></li>
-                                            <li><a className="dropdown-item" href="#">Настройки</a></li>
+                                            <li><a className="dropdown-item" href="#" name="posts" id="dropPosts"
+                                                   onClick={this.changeActiveTab}>Объвления</a></li>
+                                            <li><a className="dropdown-item" href="#" name="messages" id="dropMessages"
+                                                   onClick={this.changeActiveTab}>Сообщения</a></li>
+                                            <li><a className="dropdown-item" href="#" name="settings" id="dropSettings"
+                                                   onClick={this.changeActiveTab}>Настройки</a></li>
                                             <li><a className="dropdown-item disabled" href="#">Избранные:</a></li>
-                                            <li><a className="dropdown-item" href="#">Объявление</a></li>
-                                            <li><a className="dropdown-item" href="#">Поиски</a></li>
+                                            <li><a
+                                                id="favorite" data-bs-toggle="modal" name="favorite"
+                                                data-bs-target="#FavoriteModal"
+                                                className="dropdown-item" href="#">Объявление</a></li>
                                             <li>
                                                 <hr className="dropdown-divider"/>
                                             </li>
-                                            <li><a className="dropdown-item" href="#" onClick={this.logout}>Выйти</a></li>
+                                            <li><a className="dropdown-item" href="#" onClick={this.logout}>Выйти</a>
+                                            </li>
                                         </ul>
                                     </div>
 
@@ -88,15 +94,15 @@ export default class Profile extends Component {
                             <div className="wrapper profile-selector">
                                 <ul className="nav nav-tab">
                                     <li className="nav-item">
-                                        <a name="posts" className="active" id="postsLi" onClick={this.changeActiveTab}
+                                        <a className="active" id="postsLi" name="posts" onClick={this.changeActiveTab}
                                         ><span>Объявление</span></a>
                                     </li>
                                     <li className="nav-item">
-                                        <a type="button" name="messages" id="messagesLi" onClick={this.changeActiveTab}
+                                        <a type="button" id="messagesLi" name="messages" onClick={this.changeActiveTab}
                                         ><span>Сообщения</span></a>
                                     </li>
                                     <li className="nav-item">
-                                        <a type="button" name="settings" id="settingsLi" onClick={this.changeActiveTab}
+                                        <a type="button" id="settingsLi" name="settings" onClick={this.changeActiveTab}
                                         ><span>Настройки</span></a>
                                     </li>
 
@@ -124,12 +130,17 @@ export default class Profile extends Component {
     changeActiveTab(e) {
         let name;
         if (e.target.tagName == "SPAN") {
+
             e.target.parentNode.className = "active";
             name = e.target.parentNode.name;
+
+
         } else {
-            e.target.className = "active";
+            if (!e.target.id.includes("drop"))
+                e.target.className = "active";
             name = e.target.name;
         }
+        console.log();
 
         switch (name) {
             case "posts":
@@ -154,9 +165,10 @@ export default class Profile extends Component {
 
         }
     }
-    logout(){
+
+    logout() {
         Util.deleteCookie('user');
-        window.location="/";
+        window.location = "/";
     }
 }
 

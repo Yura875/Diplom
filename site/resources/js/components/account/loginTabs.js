@@ -9,13 +9,13 @@ export default class LoginTabs extends Component {
         this.changeActiveTab=this.changeActiveTab.bind(this);
     }
     render() {
-        return (<div>
+        return (<div >
                 <ul className="nav nav-tab">
-                    <li className="nav-item">
+                    <li className="nav-item auth-tab">
                         <a name="auth" id="auth" className="active" onClick={this.changeActiveTab}
                         >Войти</a>
                     </li>
-                    <li className="nav-item">
+                    <li className="nav-item auth-tab">
                         <a type="button" name="reg" id="reg" onClick={this.changeActiveTab}
                         >Регистрация</a>
                     </li>
