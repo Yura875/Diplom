@@ -9,11 +9,32 @@ export default class PostItem extends Component {
         super(props);
         this.renderStatus = this.renderStatus.bind(this);
         this.redirectToPost = this.redirectToPost.bind(this);
-        console.log(Util.parseDate(this.props.post.created_at))
+        this.deactivatePost = this.deactivatePost.bind(this);
+        this.redirectToEditPost = this.redirectToEditPost.bind(this);
+        this.csrf = document.querySelector('meta[name="csrf-token"]').content;
+        this.state = {
+            deactivateButtonValue: 'Активировать'
+        }
+
     }
 
     redirectToPost() {
         window.location = "/post/" + this.props.post.slug + "/" + this.props.post.id;
+    }
+
+    componentDidMount() {
+        switch (this.props.post.status) {
+            case 'PUBLISHED':
+                this.setState({deactivateButtonValue: "Деактивировать"})
+                break;
+            case "PENDING":
+                this.setState({deactivateButtonValue: "Деактивировать"})
+                break;
+            case "DRAFT":
+                this.setState({deactivateButtonValue: "Активировать"})
+                break;
+
+        }
     }
 
     render() {
@@ -32,8 +53,9 @@ export default class PostItem extends Component {
                     <span>{this.props.post.visited_tel}</span>
                 </div>
                 <div className="float-right">
-                    <input type="button" value="Редактировать" className="edit-button"/>
-                    <input type="button" value="Деактивировать" className="deactivate-button"/>
+                    <input type="button" value="Редактировать" className="edit-button" onClick={this.redirectToEditPost}/>
+                    <input type="button" defaultValue={this.state.deactivateButtonValue} className="deactivate-button"
+                           onClick={this.deactivatePost}/>
                 </div>
             </div>
 
@@ -44,10 +66,39 @@ export default class PostItem extends Component {
     renderStatus() {
         switch (this.props.post.status) {
             case "PENDING":
+
                 return <b className="alert alert-warning m-2">На модерации</b>
             case "DRAFT":
+
                 return <b className="alert alert-danger m-2">Не активно</b>
 
         }
+    }
+
+    deactivatePost() {
+
+        let toSend = JSON.stringify({
+            _token: this.csrf,
+            user_id: this.props.user.id,
+            post_id: this.props.post.id,
+            status: this.props.post.status
+        });
+        fetch('/api/posts/deactivate', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: toSend
+
+        }).then(r => r.text()).then(console.log);
+        axios.post('/api/posts/deactivate', toSend, {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then();
+    }
+
+    redirectToEditPost() {
+        window.location = "/edit/" + this.props.post.slug + "/" + this.props.post.id;
     }
 }

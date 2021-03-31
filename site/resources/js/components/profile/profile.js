@@ -78,7 +78,7 @@ export default class Profile extends Component {
                                             <li>
                                                 <hr className="dropdown-divider"/>
                                             </li>
-                                            <li><a className="dropdown-item" href="#">Выйти</a></li>
+                                            <li><a className="dropdown-item" href="#" onClick={this.logout}>Выйти</a></li>
                                         </ul>
                                     </div>
 
@@ -153,6 +153,10 @@ export default class Profile extends Component {
 
 
         }
+    }
+    logout(){
+        Util.deleteCookie('user');
+        window.location="/";
     }
 }
 

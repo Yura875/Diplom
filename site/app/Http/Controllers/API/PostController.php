@@ -22,6 +22,8 @@ class PostController extends Controller
      */
     public function index()
     {
+//        $date = strtotime("+30 day");
+//        return date('M d, Y', $date);
         return Entity::where('status', 'PUBLISHED')->inRandomOrder()->limit(10)->with('city')->get();
     }
 
@@ -42,8 +44,9 @@ class PostController extends Controller
         $post->slug = Str::slug($request->title);
         $post->price = $request->price;
         $post->mainImage = ((!empty($request->images[0])) ? $request->images[0] : "/storage/Images/Posts/default.png");
+        $date = strtotime("+30 day");
+        $post->deactivated_at = date('Y-m-d 00:00:00', $date);
         $post->save();
-
         for ($i = 1; $i < count($request->images); $i++) {
             $image = new Image();
             $image->post_id = $post->id;
@@ -72,62 +75,15 @@ class PostController extends Controller
             $searchData += ['category_id' => $request->category_id];
         }
         if (!empty($request->minPrice)) {
-            $searchData += [['price','>',$request->minPrice]];
+            $searchData += [['price', '>', $request->minPrice]];
         }
         if (!empty($request->maxPrice)) {
-            $searchData += [['price','<',$request->maxPrice]];
+            $searchData += [['price', '<', $request->maxPrice]];
         }
-         // return $searchData;
+        // return $searchData;
 
         return response(['entity' => Entity::where($searchData)->with('city')->get(), 'status' => 6]);
-        /* if (!empty($request->search)) {
-             if ($request->city_id != 0) {
-                 if ($request->category_id != 0) {
-                     return response(['entity' => Entity::where([
-                         'status' => 'PUBLISHED',
-                         'city_id' => $request->city_id,
-                         ['title', 'LIKE', '%' . 'Заг' . '%'],
-                         'category_id' => $request->category_id])->with('city')->get(), 'status' => 1]);
 
-                 } else {
-                     return response(['entity' => Entity::where([
-                         'status' => 'PUBLISHED',
-                         'city_id' => $request->city_id,
-                         ['title', 'LIKE', '%' . 'Заг' . '%'],
-                     ])->with('city')->get(), 'status' => 2]);
-                 }
-             }
-             if ($request->category_id != 0) {
-                 return response(['entity' => Entity::where([
-                     'status' => 'PUBLISHED',
-                     'category_id' => $request->category_id,
-                     ['title','LIKE','%'.'Заг'.'%']
-                 ])->with('city')->get(), 'status' => 7]);
-             }
-             return response(['entity' => Entity::where([
-                 ['title','LIKE','%'.'Заг'.'%']
-             ])->with('city')->get(), 'status' => 8]);
-         }
-
-         if ($request->city_id != 0) {
-             if ($request->category_id != 0) {
-                 return response(['entity' => Entity::where([
-                     'status' => 'PUBLISHED',
-                     'city_id' => $request->city_id,
-                     'category_id' => $request->category_id])->with('city')->get(), 'status' => 3]);
-             } else {
-                 return response(['entity' => Entity::where([
-                     'status' => 'PUBLISHED',
-                     'city_id' => $request->city_id,
-                 ])->with('city')->get(), 'status' => 4]);
-             }
-         }
-         if ($request->category_id != 0) {
-             return response(['entity' => Entity::where([
-                 'status' => 'PUBLISHED',
-                 'category_id' => $request->category_id])->with('city')->get(), 'status' => 5]);
-         }
-         return response(['entity' => Entity::where('status', 'PUBLISHED')->with('city')->get(), 'status' => 6]);*/
     }
 
     public function byUser($id)
@@ -144,7 +100,7 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        $entity = Entity::where('id', $id)->where('status', 'PUBLISHED')->get();
+        $entity = Entity::where('id', $id)->where('status', 'PUBLISHED')->with('city')->get();
         if (empty($entity[0]))
             return response(['post' => '']);
         $images = Image::where('post_id', $id)->get();
@@ -153,6 +109,14 @@ class PostController extends Controller
         $entity[0]->save();
         $user = User::where('id', $entity[0]->author_id)->get();
         return response(["post" => $entity, 'images' => $images, 'category' => $category, 'user' => $user]);
+    }
+
+    public function byPostId(Request $request)
+    {
+        $post = Entity::where(['id' => $request->post_id, 'author_id' => $request->user_id])->with('city')->with('category')->first();
+        if (empty($post))
+            return response('not found', 404);
+        return $post;
     }
 
     /**
@@ -164,7 +128,16 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $post = Entity::findOrFail($id);
+        if (empty($post)) {
+            return response('', 403);
+        }
+        $post->title=$request->title;
+        $post->body=$request->body;
+        $post->price=$request->price;
+        $post->status="PENDING";
+        $post->save();
+        return response("Updated");
     }
 
     /**
@@ -176,5 +149,23 @@ class PostController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function deactivatePost(Request $request)
+    {
+        $post = Entity::where(['id' => $request->post_id])->first();
+        if (empty($post))
+            return response(['status' => -1]);
+        switch ($request->status) {
+            case 'PUBLISHED':
+            case 'PENDING':
+                $post->status = 'DRAFT';
+                break;
+            case 'DRAFT':
+                $post->status = 'PENDING';
+
+        }
+        $post->save();
+        return response(['status' => 1]);
     }
 }

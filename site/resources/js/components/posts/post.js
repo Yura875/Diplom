@@ -69,7 +69,7 @@ export default class Post extends Component {
                         Рубрика: <b>{this.state.category[0].name}</b>
                     </span>
                         <span>
-                        Местоположение: <b>{this.state.author[0].location}</b>
+                        Местоположение: <b>{this.state.post[0].city.name}</b>
                     </span>
                     </div>
                     <hr/>

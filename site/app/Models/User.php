@@ -41,4 +41,7 @@ class User extends \TCG\Voyager\Models\User implements MustVerifyEmail
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    public function city(){
+        return $this->belongsTo(City::class);
+    }
 }

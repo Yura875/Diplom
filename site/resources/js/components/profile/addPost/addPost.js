@@ -12,11 +12,12 @@ export default class AddPost extends Component {
             isLoadedCategory: false,
             user: {},
             category: {},
+            location: 0,
+            locationName: 0,
             obj: {},
             files: [],
             filesName: [],
             postId: 0,
-
             isLoadedCitys: false,
             citys: [],
             errors: {}
@@ -24,8 +25,8 @@ export default class AddPost extends Component {
 
         }
         this.read_user = this.read_user.bind(this);
-        this.read_category = this.read_category.bind(this);
-        this.loadNewCategory = this.loadNewCategory.bind(this);
+        this.loadCategories = this.loadCategories.bind(this);
+
         this.onChange = this.onChange.bind(this);
         this.onChangeTel = this.onChangeTel.bind(this);
         this.onChangePrice = this.onChangePrice.bind(this);
@@ -36,6 +37,7 @@ export default class AddPost extends Component {
         this.sendFile = this.sendFile.bind(this);
         this.loadCitys = this.loadCitys.bind(this);
         this.selectLocation = this.selectLocation.bind(this);
+        this.appendCategory = this.appendCategory.bind(this);
 
 
     }
@@ -50,15 +52,6 @@ export default class AddPost extends Component {
             this.state.errors[e.target.name] = "Данное поле содержит недопустимые символы";
             this.setState({});
         }
-    }
-
-    selectCategory(e) {
-        this.state.categoryId = e.target.id;
-        document.getElementById('category').innerHTML = e.target.innerText;
-        let myModalEl = document.getElementById('CategoryModal');
-        let modal = bootstrap.Modal.getInstance(myModalEl);
-        modal.hide();
-
     }
 
 
@@ -81,7 +74,13 @@ export default class AddPost extends Component {
                                        aria-label="Close"/>
                             </div>
                             <div className="modal-body d-flex" id="CategoryModalBody">
-                                {(this.state.isLoadedCategory) ? this.renderCategory(this.state.category) : ''}
+                                <ul className="list-group m-1">
+                                    {((this.state.isLoadedCategories) ? this.renderCategory(null) : '')}
+                                </ul>
+                                {(this.state.isSelectedCategory2) ?
+                                    (<ul className="list-group m-1">
+                                        {this.renderCategory(this.state.currentCategory_Id)}
+                                    </ul>) : ''}
 
                             </div>
                         </div>
@@ -134,9 +133,9 @@ export default class AddPost extends Component {
                         {(this.state.errors.description != null) ? this.state.errors.description : ''}
                     </div>
                     <div className="field-set-box-title">Цена</div>
-                    <label className="form-label">Цена*</label>
+                    <label className="form-label">Цена*</label><div>
                     <input type="text" name="price" onChange={this.onChangePrice}
-                           className="field-set-box-title-input"/>
+                           className="field-set-box-title-input"/><span>грн</span></div>
                     <div
                         className={(this.state.errors.price != null) ? "text-danger d-block" : ""}>
                         {(this.state.errors.price != null) ? this.state.errors.price : ''}
@@ -240,7 +239,7 @@ export default class AddPost extends Component {
                     <div>
                         <label>Местоположение*</label>
                         <a href="#" className="Category" data-bs-toggle="modal" name="location" id="location"
-                           data-bs-target="#LocationModal">{((this.state.user.location) ? this.state.user.location : '')}</a>
+                           data-bs-target="#LocationModal">{((this.state.location) ? this.state.locationName : '')}</a>
                     </div>
                     <div>
                         <label>Номер телефона</label>
@@ -322,9 +321,8 @@ export default class AddPost extends Component {
     }
 
     send() {
-
-        if (this.state.title.length < 10) {
-            this.state.errors.title = "Заголовок должен быть не короче 10 знаков";
+        if (this.state.title.length ==0) {
+            this.state.errors.title = "Заголовок не может быть пустым";
             this.setState({});
             return;
         }
@@ -333,8 +331,8 @@ export default class AddPost extends Component {
             this.setState({});
             return;
         }
-        if (this.state.description.length < 40) {
-            this.state.errors.description = "Описание должно быть не короче 40 знаков";
+        if (this.state.description.length ==0) {
+            this.state.errors.description = "Описание не может быть пустым";
             this.setState({});
             return;
         }
@@ -360,6 +358,7 @@ export default class AddPost extends Component {
             title: this.state.title,
             category_id: this.state.categoryId,
             author_id: this.state.user.id,
+            city_id: this.state.location,
             body: this.state.description,
             price: parseFloat(this.state.price),
             images: this.state.files
@@ -374,6 +373,7 @@ export default class AddPost extends Component {
         }).then(response => {
 
             if (response.data.status == 1) {
+                console.log("OK")
                 this.updateUser();
             }
 
@@ -384,11 +384,12 @@ export default class AddPost extends Component {
     }
 
     updateUser() {
+        console.log(this.state);
         let toSend = JSON.stringify({
             _token: this.csrf,
             location: this.state.location,
             tel: (Util.isValidTel(this.state.tel) ? this.state.tel : ''),
-            name: ((Util.isValid(state.name)) ? this.state.name : '')
+            name: ((Util.isValid(this.state.name)) ? this.state.name : '')
         });
         axios.put('/api/user/' + this.state.user.id, toSend, {
             headers: {
@@ -397,6 +398,13 @@ export default class AddPost extends Component {
         }).then(r => {
             window.location = "/myaccount";
         })
+    }
+
+    loadCategories() {
+        axios.get('/api/category').then(response => {
+
+            this.setState({isLoadedCategories: true, category: response.data})
+        });
     }
 
     read_user() {
@@ -415,8 +423,15 @@ export default class AddPost extends Component {
                 return;
             } else if (status == 1) {
 
-                this.setState({user: res.user, isLoadedUser: true});
-                this.read_category(null);
+                this.setState({
+                    user: res.user,
+                    isLoadedUser: true,
+                    location: res.user.city_id,
+                    locationName: res.user.city.name,
+                    name: res.user.name,
+                    tel: res.user.tel
+                });
+                this.loadCategories();
                 this.loadCitys();
             }
 
@@ -425,33 +440,36 @@ export default class AddPost extends Component {
         });
     }
 
-    read_category() {
-        fetch('/api/category/' + null).then(r => r.json()).then(res => {
-            this.setState({isLoadedCategory: true, category: res.category})
-            return res.category;
+    appendCategory(e) {
+        this.setState({
+            currentCategory_Id: e.target.id,
+            currentCategoryName: e.target.innerText,
+            isSelectedCategory2: true
         });
-    }
-
-    renderCategory(category) {
-        return (
-            <ul className="list-group">
-                {category.map(item => (
-
-                    <li onClick={this.selectCategory} id={item.id}
-                        className="list-group-item list-group-item-action list-group-item-light"
-                        key={item.id.toString()}>{item.name}</li>
-                ))}
-            </ul>
-        );
 
     }
 
-    loadNewCategory(e) {
-        fetch("/api/category/" + e.target.id).then(r => r.json()).then(res => {
-            console.log(res);
-            document.getElementById("CategoryModalBody").innerText += this.renderCategory(res.category);
-        });
+    selectCategory(e) {
+        this.state.categoryId = e.target.id;
+        this.state.mode = '';
+        document.getElementById('category').innerHTML = e.target.innerText;
+        let myModalEl = document.getElementById('CategoryModal');
+        let modal = bootstrap.Modal.getInstance(myModalEl);
+        modal.hide();
+
     }
+
+    renderCategory(id) {
+        return this.state.category.map(item => (
+            (item.category_id == id) ? (
+                <li onClick={(item.category[0] == undefined) ? this.selectCategory : this.appendCategory} id={item.id}
+                    className="list-group-item list-group-item-action list-group-item-light"
+                    key={item.id.toString()}>{item.name}</li>) : ('')
+        ));
+
+
+    }
+
 
     selectImage() {
         let input = document.createElement('input');
@@ -468,7 +486,7 @@ export default class AddPost extends Component {
     }
 
     selectLocation(e) {
-        this.state.location = e.target.innerText;
+        this.state.location = e.target.id;
         document.getElementById('location').innerHTML = e.target.innerText;
         let myModalEl = document.getElementById('LocationModal');
         let modal = bootstrap.Modal.getInstance(myModalEl);
@@ -492,6 +510,9 @@ export default class AddPost extends Component {
     loadCitys() {
         axios.get('/api/citys').then(response => {
             this.setState({citys: response.data, isLoadedCitys: true});
+            for (let item of response.data){
+
+            }
         });
     }
 }

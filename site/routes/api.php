@@ -43,7 +43,12 @@ Route::resource('/posts', \App\Http\Controllers\API\PostController::class);
 Route::post('/posts/byParameters', [\App\Http\Controllers\API\PostController::class, 'byParameters']);
 Route::get('/posts/byUser/{id}', [\App\Http\Controllers\API\PostController::class, 'byUser']);
 Route::get('/posts/{id}', [\App\Http\Controllers\API\PostController::class, 'show']);
+Route::post('/posts/deactivate', [\App\Http\Controllers\API\PostController::class, 'deactivatePost']);
+Route::post('/posts/byId', [\App\Http\Controllers\API\PostController::class, 'byPostId']);
 
 // City
 Route::resource("/citys", \App\Http\Controllers\API\CitysController::class);
+Route::get("/citys/{id}", [\App\Http\Controllers\API\CitysController::class,'show']);
 
+// favorite
+Route::resource('/favorite',\App\Http\Controllers\API\FavoriteController::class);

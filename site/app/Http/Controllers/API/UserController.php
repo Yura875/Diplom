@@ -70,7 +70,7 @@ class UserController extends Controller
             return response(["status" => -1]);
         }
 
-        $user = User::where("id", $user_id->user_id)->first();
+        $user = User::where("id", $user_id->user_id)->with('city')->first();
         return response(["status" => 1, "user" => $user]);
     }
 
@@ -89,7 +89,7 @@ class UserController extends Controller
             return response(['status' => -1]);
         if (!empty($request->location)) {
 
-            $user->location = $request->location;
+            $user->city_id = $request->location;
         }
         if (!empty($request->name)) {
             $user->name = $request->name;
