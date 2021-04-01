@@ -14,6 +14,7 @@ import FileOperation from "./tmp/fileOperation";
 import Post from "./posts/post";
 import Search from "./search/search";
 import Edit from "./posts/edit";
+import Chat from "./posts/chat";
 
 function Root() {
     return (
@@ -31,6 +32,7 @@ function Root() {
                 <Route path="/addPost" component={AddPost}/>
                 <Route path="/post/:slug/:id" component={Post}/>
                 <Route path="/edit/:slug/:id" component={Edit}/>
+                <Route path="/chat/:slug/:id" component={Chat}/>
 
 
 

@@ -905,6 +905,7 @@ hr:not([size]) {
     width: 75%;
     margin: auto;
     margin-top: 48px;
+    color: rgba(255,255,255,.5);
 }
 
 .tel-button {

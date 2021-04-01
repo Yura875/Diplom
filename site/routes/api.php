@@ -52,3 +52,7 @@ Route::get("/citys/{id}", [\App\Http\Controllers\API\CitysController::class,'sho
 
 // favorite
 Route::resource('/favorite',\App\Http\Controllers\API\FavoriteController::class);
+
+// Message
+Route::resource('/message',\App\Http\Controllers\API\MessagesController::class);
+Route::get('/message/{id}',[\App\Http\Controllers\API\MessagesController::class,'show']);

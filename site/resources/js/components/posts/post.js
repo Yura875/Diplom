@@ -1,23 +1,82 @@
 import React, {Component} from 'react';
+import Util from "../util/util";
 
 export default class Post extends Component {
     constructor(props) {
         super(props);
         this.readPost = this.readPost.bind(this);
+        this.read_user = this.read_user.bind(this);
         this.showImages = this.showImages.bind(this);
         this.showIndicators = this.showIndicators.bind(this);
         this.showTel = this.showTel.bind(this);
+        this.sendMessage = this.sendMessage.bind(this);
+        this.onChange = this.onChange.bind(this);
         this.state = {
+            user: {},
+            isLoadedUser: false,
             post: {},
             images: {},
             index: 1,
             category: {},
-            author: {}
+            author: {},
+            errors: {},
+            message: ''
+        }
+    }
+
+    onChange(e) {
+        console.log(e.target)
+        if (Util.isValid(e.target.value)) {
+            this.state[e.target.name] = e.target.value;
+            this.state.errors[e.target.name] = null;
+            this.setState({});
+        } else {
+            this.state[e.target.name] = e.target.value;
+            this.state.errors[e.target.name] = "Данное поле содержит недопустимые символы";
+            this.setState({});
         }
     }
 
     componentDidMount() {
         this.readPost();
+        this.read_user();
+    }
+
+    send() {
+        if (this.state.errors.search != null) {
+            return;
+        }
+        let data = JSON.stringify({
+            'search': this.state.search,
+        });
+
+        let today = new Date();
+        today.setMinutes(today.getMinutes() + 30);
+        Util.set_cookie('search', data, {expires: today});
+        window.location = "/search";
+    }
+
+    read_user() {
+        let user_token = Util.get_cookie("user");
+
+        if (!user_token) {
+            return;
+
+        }
+
+        fetch("/api/user/" + user_token).then(r => r.json()).then(res => {
+
+            let status = res.status;
+            if (status == 1) {
+
+                this.setState({
+                    user: res.user,
+                    isLoadedUser: true,
+                });
+                this.loadFavorite()
+            }
+
+        });
     }
 
     readPost() {
@@ -86,10 +145,14 @@ export default class Post extends Component {
                         </div>
                         <div>
                             <span>Написать сообщение</span>
-                            <textarea className="message">
+                            <textarea className="message" name="message" onChange={this.onChange}>
 
                                    </textarea>
-                            <input type="button" value="Отправить" className="msg-button"/>
+                            <div
+                                className={(this.state.errors.message != null) ? "text-danger d-inline-block lead" : ""}>
+                                {(this.state.errors.message != null) ? this.state.errors.message : ''}
+                            </div>
+                            <input type="button" value="Отправить" className="msg-button" onClick={this.sendMessage}/>
                         </div>
                     </div>
                 </div>);
@@ -124,4 +187,36 @@ export default class Post extends Component {
         ));
     }
 
+    sendMessage() {
+        if (this.state.errors.message) {
+            return;
+        }
+        console.log(this.state.message.length);
+        if (this.state.message.length == 0) {
+            this.state.errors.message = "Сообщение не может быть пустым";
+            this.setState({});
+        }
+        let toSend = JSON.stringify({
+            user_id: this.state.user.id,
+            post_id: this.state.post[0].id,
+            body: this.state.message
+        });
+        if (!this.state.isLoadedUser) {
+            this.state.errors.message = 'Вам необходимо <a href="/account"> авторизоватся</a>';
+            this.setState({});
+            return;
+        }
+
+
+        axios.post('/api/message', toSend, {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(response => {
+            window.location = "/chat/" + this.state.post[0].slug + "/" + this.state.post[0].id;
+        }).catch(error => {
+            this.state.errors.message = 'Произошла ошибка при отправке сообщения';
+            this.setState({});
+        });
+    }
 }

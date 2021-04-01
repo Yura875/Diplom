@@ -11,7 +11,7 @@ export default class Header extends Component {
             isLoadedUser: false,
             incorrectUser: false,
             isLoadedFavorite: false,
-            errors:{}
+            errors: {}
 
         }
 
@@ -20,6 +20,7 @@ export default class Header extends Component {
         this.send = this.send.bind(this);
         this.onChange = this.onChange.bind(this);
     }
+
     onChange(e) {
 
         if (Util.isValid(e.target.value)) {
@@ -32,6 +33,7 @@ export default class Header extends Component {
             this.setState({});
         }
     }
+
     render() {
         return (
             <nav className="navbar navbar-expand-lg header">
@@ -71,7 +73,8 @@ export default class Header extends Component {
                             <a href="#" id="favorite" className="nav-link favorites" data-bs-toggle="modal"
                                name="favorite"
                                data-bs-target="#FavoriteModal"><span><i className="fa fa-heart"></i></span></a>
-                            <input className="form-control me-2" type="search" onChange={this.onChange} name="search" placeholder="Поиск" aria-label="Search"/>
+                            <input className="form-control me-2" type="search" onChange={this.onChange} name="search"
+                                   placeholder="Поиск" aria-label="Search"/>
                             <button className="btn btn-outline-success" onClick={this.send} type="submit">Поиск</button>
                         </div>
                         <div className="d-flex ml-5">
@@ -101,7 +104,7 @@ export default class Header extends Component {
         let user_token = Util.get_cookie("user");
 
         if (!user_token) {
-            this.setState({incorrectUser: true})
+            return
 
         }
 
