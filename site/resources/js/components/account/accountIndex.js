@@ -26,7 +26,7 @@ export default class accountIndex extends Component {
     render() {
         return (
             <section className="auth-page">
-                <div className="auth-box">
+                <div className="auth-box" id="authpage">
                     {this.renderPage()}
                 </div>
             </section>
@@ -38,8 +38,6 @@ export default class accountIndex extends Component {
         switch (this.state.page) {
             case "forgotPassword":
                 return <ForgotPassword/>
-            case "verification":
-                return <VerificateEmail/>
             default:
                 return <LoginTabs/>
         }

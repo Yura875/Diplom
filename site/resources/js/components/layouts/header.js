@@ -11,53 +11,30 @@ export default class Header extends Component {
             isLoadedUser: false,
             incorrectUser: false,
             isLoadedFavorite: false,
+            errors:{}
 
         }
 
         this.loadFavorite = this.loadFavorite.bind(this);
         this.renderFavorite = this.renderFavorite.bind(this);
+        this.send = this.send.bind(this);
+        this.onChange = this.onChange.bind(this);
     }
-/*
-  <nav className="navbar navbar-expand-lg header" id="header">
-                <div className="modal fade" id="FavoriteModal" tabIndex="-1" aria-labelledby="FavoriteModalLabel"
-                     aria-hidden="true">
-                    <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-                        <div className="modal-content">
-                            <div className="modal-header">
-                                <h5 className="modal-title" id="exampleModalLabel">Избранное</h5>
-                                <input type="button" className="btn-close" data-bs-dismiss="modal"
-                                       aria-label="Close"/>
-                            </div>
-                            <div className="modal-body d-flex" id="CategoryModalBody">
-                                {(this.state.isLoadedFavorite)?this.renderFavorite():''}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div className="navigation">
-                    <a href="/" className="home-link">
-                        <img src="/Images/logo.png"/>
-                    </a>
+    onChange(e) {
 
-                    <div className="right-panel">
-                        <a href="#" id="category" className="container favorites" data-bs-toggle="modal" name="category"
-                           data-bs-target="#FavoriteModal"> <img src="/Images/favorites.png"/></a>
-                        <a className="container profile" href="/myaccount">
-
-                            <span><img src="/Images/profile.png"/>Мой профиль</span>
-                        </a>
-
-                        <a id="new-ad-link" href="/addPost">Подать объявление</a>
-                    </div>
-
-                </div>
-
-            </nav>
-            <i class="far fa-user"></i>
-*/
+        if (Util.isValid(e.target.value)) {
+            this.state[e.target.name] = e.target.value;
+            this.state.errors[e.target.name] = null;
+            this.setState({});
+        } else {
+            this.state[e.target.name] = e.target.value;
+            this.state.errors[e.target.name] = "Данное поле содержит недопустимые символы";
+            this.setState({});
+        }
+    }
     render() {
         return (
-            <nav className="navbar navbar-expand-lg navbar-light bg-light">
+            <nav className="navbar navbar-expand-lg header">
                 <div className="modal fade" id="FavoriteModal" tabIndex="-1" aria-labelledby="FavoriteModalLabel"
                      aria-hidden="true">
                     <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
@@ -68,7 +45,7 @@ export default class Header extends Component {
                                        aria-label="Close"/>
                             </div>
                             <div className="modal-body d-flex" id="CategoryModalBody">
-                                {(this.state.isLoadedFavorite)?this.renderFavorite():''}
+                                {(this.state.isLoadedFavorite) ? this.renderFavorite() : ''}
                             </div>
                         </div>
                     </div>
@@ -91,18 +68,33 @@ export default class Header extends Component {
 
                         </ul>
                         <div className="d-flex mr-5">
-                            <a href="#" id="favorite" className="nav-link favorites" data-bs-toggle="modal" name="favorite"
-                                data-bs-target="#FavoriteModal"><span><i className="fa fa-heart"></i></span></a>
-                            <input className="form-control me-2" type="search" placeholder="Поиск" aria-label="Search"/>
-                            <button className="btn btn-outline-success" type="submit">Поиск</button>
+                            <a href="#" id="favorite" className="nav-link favorites" data-bs-toggle="modal"
+                               name="favorite"
+                               data-bs-target="#FavoriteModal"><span><i className="fa fa-heart"></i></span></a>
+                            <input className="form-control me-2" type="search" onChange={this.onChange} name="search" placeholder="Поиск" aria-label="Search"/>
+                            <button className="btn btn-outline-success" onClick={this.send} type="submit">Поиск</button>
                         </div>
                         <div className="d-flex ml-5">
-                            <a id="new-ad-link"  className="nav-link" href="/addPost">Подать объявление</a>
+                            <a id="new-ad-link" className="nav-link" href="/addPost">Подать объявление</a>
                         </div>
                     </div>
                 </div>
             </nav>
         );
+    }
+
+    send() {
+        if (this.state.errors.search != null) {
+            return;
+        }
+        let data = JSON.stringify({
+            'search': this.state.search,
+        });
+
+        let today = new Date();
+        today.setMinutes(today.getMinutes() + 30);
+        Util.set_cookie('search', data, {expires: today});
+        window.location = "/search";
     }
 
     read_user() {
@@ -139,9 +131,9 @@ export default class Header extends Component {
     }
 
     renderFavorite() {
-        if(this.state.incorrectUser)
+        if (this.state.incorrectUser)
             return <span>Вам необходимо <a href="/account">авторизоватся</a> </span>
-        return this.state.favorite.map(item=>(
+        return this.state.favorite.map(item => (
             <PostItem post={item}/>
         ))
     }

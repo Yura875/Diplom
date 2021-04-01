@@ -23,7 +23,7 @@ class UserController extends Controller
         }
         if (empty(Auth::user()->email_verified_at)) {
             Auth::user()->sendEmailVerificationNotification();
-            return response(["status" => 2]);
+            return response(["status" => 2, 'user' => Auth::user()]);
         }
         $token = Auth::user()->createToken($data['email'])->token->id;
         return response(["status" => 1, "token" => $token]);
@@ -53,7 +53,7 @@ class UserController extends Controller
         $data['name'] = substr($data['email'], 0, strrpos($data['email'], '@'));
         $user = User::create($data);
         $user->sendEmailVerificationNotification();
-        return response('{"status":1,"msg":"Регистрация прошла успешно"}');
+        return response(["status"=>1,"msg"=>"Регистрация прошла успешно","user"=>$user]);
     }
 
     /**
@@ -123,6 +123,6 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-       return response(["status"=> User::destroy($id)]);
+        return response(["status" => User::destroy($id)]);
     }
 }

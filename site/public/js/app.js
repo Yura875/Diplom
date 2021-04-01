@@ -2178,6 +2178,7 @@ var accountIndex = /*#__PURE__*/function (_Component) {
         className: "auth-page",
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("div", {
           className: "auth-box",
+          id: "authpage",
           children: this.renderPage()
         })
       });
@@ -2188,9 +2189,6 @@ var accountIndex = /*#__PURE__*/function (_Component) {
       switch (this.state.page) {
         case "forgotPassword":
           return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_forgotPassword__WEBPACK_IMPORTED_MODULE_6__.default, {});
-
-        case "verification":
-          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_verificateEmail__WEBPACK_IMPORTED_MODULE_7__.default, {});
 
         default:
           return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_loginTabs__WEBPACK_IMPORTED_MODULE_5__.default, {});
@@ -2219,7 +2217,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var _util_util__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../util/util */ "./resources/js/components/util/util.js");
 /* harmony import */ var _accountIndex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./accountIndex */ "./resources/js/components/account/accountIndex.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
+/* harmony import */ var _verificateEmail__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./verificateEmail */ "./resources/js/components/account/verificateEmail.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -2241,6 +2241,8 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
 
 
 
@@ -2279,14 +2281,14 @@ var Authorization = /*#__PURE__*/function (_Component) {
   }, {
     key: "render",
     value: function render() {
-      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
         id: "auth-block",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
           className: "auth-block",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("label", {
             className: "form-label",
             children: "\u0423\u043A\u0430\u0436\u0438\u0442\u0435 \u0432\u0430\u0448 email"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("input", {
             name: "email",
             type: "email",
             title: "\u0423\u043A\u0430\u0436\u0438\u0442\u0435 \u0432\u0430\u0448 email",
@@ -2294,12 +2296,12 @@ var Authorization = /*#__PURE__*/function (_Component) {
             onChange: this.onChange,
             required: true
           })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
           className: "auth-block",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("label", {
             className: "form-label",
             children: "\u0412\u0430\u0448 \u0442\u0435\u043A\u0443\u0449\u0438\u0439 \u043F\u0430\u0440\u043E\u043B\u044C"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("input", {
             type: "password",
             title: "\u0412\u0430\u0448 \u0442\u0435\u043A\u0443\u0449\u0438\u0439 \u043F\u0430\u0440\u043E\u043B\u044C",
             onChange: this.onChange,
@@ -2307,15 +2309,15 @@ var Authorization = /*#__PURE__*/function (_Component) {
             placeholder: "\u0412\u0430\u0448 \u0442\u0435\u043A\u0443\u0449\u0438\u0439 \u043F\u0430\u0440\u043E\u043B\u044C",
             required: true
           })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
           className: "auth-block",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("a", {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("a", {
             href: "/account/forgotPassword",
             children: "\u041D\u0435 \u043C\u043E\u0436\u0435\u0442\u0435 \u0432\u043E\u0439\u0442\u0438?"
           })
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
           className: "auth-block",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("input", {
             type: "button",
             onClick: this.auth_user,
             className: "Login-Button",
@@ -2389,7 +2391,9 @@ var Authorization = /*#__PURE__*/function (_Component) {
         }
 
         if (status == 2) {
-          window.location = "/account/verification";
+          react_dom__WEBPACK_IMPORTED_MODULE_3__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_verificateEmail__WEBPACK_IMPORTED_MODULE_4__.default, {
+            user: res.user
+          }), document.getElementById("authpage"));
         }
       });
     }
@@ -2711,7 +2715,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
 /* harmony import */ var _authorization__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./authorization */ "./resources/js/components/account/authorization.js");
 /* harmony import */ var _util_util__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../util/util */ "./resources/js/components/util/util.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _verificateEmail__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./verificateEmail */ "./resources/js/components/account/verificateEmail.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -2733,6 +2738,7 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
 
 
 
@@ -2771,7 +2777,7 @@ var Registration = /*#__PURE__*/function (_Component) {
       document.getElementById("Pass2").value = "";
       document.getElementById("reg").className = "";
       document.getElementById("auth").className = "active";
-      react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_authorization__WEBPACK_IMPORTED_MODULE_2__.default, {}), document.getElementById("mode"));
+      react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_authorization__WEBPACK_IMPORTED_MODULE_2__.default, {}), document.getElementById("mode"));
     }
   }, {
     key: "onChange",
@@ -2794,14 +2800,14 @@ var Registration = /*#__PURE__*/function (_Component) {
   }, {
     key: "render",
     value: function render() {
-      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
         id: "reg-block",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
           className: "auth-block",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("label", {
             className: "form-label",
             children: "\u0423\u043A\u0430\u0436\u0438\u0442\u0435 \u0432\u0430\u0448 email"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("input", {
             type: "email",
             title: "\u0423\u043A\u0430\u0436\u0438\u0442\u0435 \u0432\u0430\u0448 email",
             name: "email",
@@ -2809,42 +2815,42 @@ var Registration = /*#__PURE__*/function (_Component) {
             onChange: this.onChange,
             placeholder: "\u0423\u043A\u0430\u0436\u0438\u0442\u0435 \u0432\u0430\u0448 email",
             required: true
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
             id: "emailErr"
           })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
           className: "auth-block",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("label", {
             className: "form-label",
             children: "\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u0441\u0432\u043E\u0439 \u043F\u0430\u0440\u043E\u043B\u044C"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("input", {
             type: "password",
             title: "\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u0441\u0432\u043E\u0439 \u043F\u0430\u0440\u043E\u043B\u044C",
             name: "password",
             id: "Pass1",
             placeholder: "\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u0441\u0432\u043E\u0439 \u043F\u0430\u0440\u043E\u043B\u044C",
             onChange: this.onChange
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
             id: "passwordErr"
           })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
           className: "auth-block",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("label", {
             className: "form-label",
             children: "\u041F\u043E\u0432\u0442\u043E\u0440\u0438\u0442\u0435 \u0441\u0432\u043E\u0439 \u043F\u0430\u0440\u043E\u043B\u044C"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("input", {
             type: "password",
             title: "\u041F\u043E\u0432\u0442\u043E\u0440\u0438\u0442\u0435 \u0441\u0432\u043E\u0439 \u043F\u0430\u0440\u043E\u043B\u044C",
             name: "password2",
             id: "Pass2",
             placeholder: "\u041F\u043E\u0432\u0442\u043E\u0440\u0438\u0442\u0435 \u0441\u0432\u043E\u0439 \u043F\u0430\u0440\u043E\u043B\u044C",
             onChange: this.onChange
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
             id: "password2Err"
           })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
           className: "auth-block",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("input", {
             type: "button",
             onClick: this.reg_user,
             className: "Login-Button",
@@ -2927,7 +2933,9 @@ var Registration = /*#__PURE__*/function (_Component) {
 
           _this2.clearUserInput();
 
-          window.location = "/account/verification";
+          react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_verificateEmail__WEBPACK_IMPORTED_MODULE_4__.default, {
+            user: res.user
+          }), document.getElementById("authpage"));
         }
       });
     }
@@ -3191,23 +3199,38 @@ var VerificateEmail = /*#__PURE__*/function (_Component) {
 
   var _super = _createSuper(VerificateEmail);
 
-  function VerificateEmail() {
+  function VerificateEmail(props) {
+    var _this;
+
     _classCallCheck(this, VerificateEmail);
 
-    return _super.apply(this, arguments);
+    _this = _super.call(this, props);
+    _this.resend = _this.resend.bind(_assertThisInitialized(_this));
+    return _this;
   }
 
   _createClass(VerificateEmail, [{
     key: "render",
     value: function render() {
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("a", {
+        className: "auth-block",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("p", {
+          children: "\u0412\u0430\u043C \u043D\u0430 \u043F\u043E\u0447\u0442\u0443 \u0431\u044B\u043B\u043E \u043E\u0442\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u043E \u0441\u043E\u043E\u0431\u0449\u0435\u043D\u0438\u0435 \u0441 \u043F\u043E\u0434\u0442\u0432\u0435\u0440\u0436\u0434\u0435\u043D\u0438\u0435\u043C \u0440\u0435\u0433\u0438\u0441\u0442\u0440\u0430\u0446\u0438\u0438"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("a", {
+          href: "#",
+          onClick: this.resend,
           children: "\u041E\u0442\u043F\u0440\u0430\u0432\u0438\u0442\u044C \u043F\u043E\u0432\u0442\u043E\u0440\u043D\u043E"
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("a", {
           href: "/",
+          className: "redirect-to-home",
           children: "\u0412\u0435\u0440\u043D\u0443\u0442\u0441\u044F \u043D\u0430 \u0433\u043B\u0430\u0432\u043D\u0443\u044E"
         })]
       });
+    }
+  }, {
+    key: "resend",
+    value: function resend() {
+      axios.get('/api/email/resend/' + this.props.user.id).then();
     }
   }]);
 
@@ -3928,57 +3951,34 @@ var Header = /*#__PURE__*/function (_Component) {
       user: {},
       isLoadedUser: false,
       incorrectUser: false,
-      isLoadedFavorite: false
+      isLoadedFavorite: false,
+      errors: {}
     };
     _this.loadFavorite = _this.loadFavorite.bind(_assertThisInitialized(_this));
     _this.renderFavorite = _this.renderFavorite.bind(_assertThisInitialized(_this));
+    _this.send = _this.send.bind(_assertThisInitialized(_this));
+    _this.onChange = _this.onChange.bind(_assertThisInitialized(_this));
     return _this;
   }
-  /*
-    <nav className="navbar navbar-expand-lg header" id="header">
-                  <div className="modal fade" id="FavoriteModal" tabIndex="-1" aria-labelledby="FavoriteModalLabel"
-                       aria-hidden="true">
-                      <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-                          <div className="modal-content">
-                              <div className="modal-header">
-                                  <h5 className="modal-title" id="exampleModalLabel">Избранное</h5>
-                                  <input type="button" className="btn-close" data-bs-dismiss="modal"
-                                         aria-label="Close"/>
-                              </div>
-                              <div className="modal-body d-flex" id="CategoryModalBody">
-                                  {(this.state.isLoadedFavorite)?this.renderFavorite():''}
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-                  <div className="navigation">
-                      <a href="/" className="home-link">
-                          <img src="/Images/logo.png"/>
-                      </a>
-  
-                      <div className="right-panel">
-                          <a href="#" id="category" className="container favorites" data-bs-toggle="modal" name="category"
-                             data-bs-target="#FavoriteModal"> <img src="/Images/favorites.png"/></a>
-                          <a className="container profile" href="/myaccount">
-  
-                              <span><img src="/Images/profile.png"/>Мой профиль</span>
-                          </a>
-  
-                          <a id="new-ad-link" href="/addPost">Подать объявление</a>
-                      </div>
-  
-                  </div>
-  
-              </nav>
-              <i class="far fa-user"></i>
-  */
-
 
   _createClass(Header, [{
+    key: "onChange",
+    value: function onChange(e) {
+      if (_util_util__WEBPACK_IMPORTED_MODULE_1__.default.isValid(e.target.value)) {
+        this.state[e.target.name] = e.target.value;
+        this.state.errors[e.target.name] = null;
+        this.setState({});
+      } else {
+        this.state[e.target.name] = e.target.value;
+        this.state.errors[e.target.name] = "Данное поле содержит недопустимые символы";
+        this.setState({});
+      }
+    }
+  }, {
     key: "render",
     value: function render() {
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("nav", {
-        className: "navbar navbar-expand-lg navbar-light bg-light",
+        className: "navbar navbar-expand-lg header",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
           className: "modal fade",
           id: "FavoriteModal",
@@ -4065,10 +4065,13 @@ var Header = /*#__PURE__*/function (_Component) {
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
                 className: "form-control me-2",
                 type: "search",
+                onChange: this.onChange,
+                name: "search",
                 placeholder: "\u041F\u043E\u0438\u0441\u043A",
                 "aria-label": "Search"
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
                 className: "btn btn-outline-success",
+                onClick: this.send,
                 type: "submit",
                 children: "\u041F\u043E\u0438\u0441\u043A"
               })]
@@ -4084,6 +4087,23 @@ var Header = /*#__PURE__*/function (_Component) {
           })]
         })]
       });
+    }
+  }, {
+    key: "send",
+    value: function send() {
+      if (this.state.errors.search != null) {
+        return;
+      }
+
+      var data = JSON.stringify({
+        'search': this.state.search
+      });
+      var today = new Date();
+      today.setMinutes(today.getMinutes() + 30);
+      _util_util__WEBPACK_IMPORTED_MODULE_1__.default.set_cookie('search', data, {
+        expires: today
+      });
+      window.location = "/search";
     }
   }, {
     key: "read_user",

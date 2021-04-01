@@ -15,7 +15,7 @@ export default class Welcome extends Component {
             posts: {},
             isLoadedPosts: false,
             errors: {},
-            location:0,
+            location: 0,
         }
         this.renderCitys = this.renderCitys.bind(this);
         this.renderCategories = this.renderCategories.bind(this);
@@ -85,7 +85,8 @@ export default class Welcome extends Component {
                     <a href="#" className="Category pl-3" data-bs-toggle="modal" name="location" id="location"
                        data-bs-target="#LocationModal">Вся Украина</a>
 
-                    <button type="button" className="search-button" onClick={this.send}><span>&#8981;</span>Поиск</button>
+                    <button type="button" className="search-button" onClick={this.send}><span>&#8981;</span>Поиск
+                    </button>
 
                 </div>
                 <div className="main-category m-5">
@@ -114,7 +115,7 @@ export default class Welcome extends Component {
         let today = new Date();
         today.setMinutes(today.getMinutes() + 30);
         Util.set_cookie('search', data, {expires: today});
-        window.location="/search";
+        window.location = "/search";
     }
 
     loadPosts() {
@@ -166,11 +167,11 @@ export default class Welcome extends Component {
 
         return <ul className="list-group list-group-horizontal">
             {
-                this.state.categories.map(item => ((item.category_id==null)?
-                    <li key={item.id} className="list-group-item">
+                this.state.categories.map(item => ((item.category_id == null) ?
+                        <li key={item.id} className="list-group-item">
     <span className="main-category-image"><img src={"/Images/welcome/" + item.slug + ".png"}
                                                alt="..."/></span>
-                        <span className="main-category-text">{item.name}</span></li>:('')
+                            <span className="main-category-text">{item.name}</span></li> : ('')
                 ))}
         </ul>
     }

@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import Util from "../util/util";
 import accountIndex from "./accountIndex";
+import ReactDOM from "react-dom";
+import VerificateEmail from "./verificateEmail";
 
 export default class Authorization extends Component {
     constructor(props) {
@@ -104,7 +106,7 @@ export default class Authorization extends Component {
                 window.location = "/" + ref;
             }
             if (status == 2) {
-                window.location = "/account/verification";
+                ReactDOM.render(<VerificateEmail user={res.user}/>,document.getElementById("authpage"))
             }
 
         });

@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import Authorization from "./authorization";
 import Util from "../util/util";
+import VerificateEmail from "./verificateEmail";
 export default class Registration extends Component {
     constructor(props) {
         super(props);
@@ -130,7 +131,7 @@ export default class Registration extends Component {
                 resultDiv.innerHTML = msg;
                 resultDiv.className = "alert alert-success auth-block";
                 this.clearUserInput();
-                window.location = "/account/verification";
+               ReactDOM.render(<VerificateEmail user={res.user}/>,document.getElementById("authpage"))
 
             }
         });

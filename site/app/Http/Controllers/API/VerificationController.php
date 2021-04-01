@@ -38,12 +38,11 @@ class VerificationController extends Controller
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function resend() {
-        if (auth()->user()->hasVerifiedEmail()) {
-            return $this->respondBadRequest(253);
-        }
+    public function resend($id) {
 
-        auth()->user()->sendEmailVerificationNotification();
+        $user = User::findOrFail($id);
+
+
 
         return $this->respondWithMessage("Email verification link sent on your email id");
     }
